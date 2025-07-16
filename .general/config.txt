@@ -1,0 +1,46 @@
+# SEO Generator Configuration
+# Format: key=value (one per line)
+
+# Domain Configuration
+domain=example.com
+site_name=
+site_description=
+
+# Article Settings - Optimized for GitHub Actions
+articles_per_run=1
+min_word_count=3500
+max_word_count=5000
+target_headings=15
+language=English
+
+# Categories (comma-separated)
+# AI will auto-detect categories, but these will be used as base categories
+base_categories=Business,Finance,Technology,Marketing,Investment
+
+# Author Information
+author_name=Admin
+author_email=admin@example.com
+
+# SEO Settings
+enable_internal_linking=true
+max_internal_links=3
+enable_external_links=false
+max_external_links=4
+
+# Image Settings - Optimized for GitHub Actions
+enable_auto_images=true
+images_per_article=2
+min_images_per_article=1
+image_search_enabled=true
+
+# Content Settings
+enable_faq_section=false
+enable_conclusion_links=true
+enable_meta_description=true
+h2_min_words=400
+h2_max_words=600
+h3_min_words=200
+h3_max_words=300
+enable_deep_analysis=true
+enable_bullet_points=true
+enable_tables=true

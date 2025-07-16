@@ -1,0 +1,9 @@
+# Ads.txt file for CartLab Business
+# This file is prepared for future AdSense integration
+# Publishers should replace with their actual AdSense publisher ID when ready
+
+# Google AdSense placeholder - to be updated with actual publisher ID
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+
+# Note: This file will be updated when AdSense approval is obtained
+# For now, it serves as a placeholder to show AdSense compliance preparation

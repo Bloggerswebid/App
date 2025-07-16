@@ -1,0 +1,54 @@
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="site-branding">
+        <a href="{{ '/' | relative_url }}" class="site-logo">
+          <span class="site-title">{{ site.title }}</span>
+        </a>
+      </div>
+      
+      <div class="header-right">
+        <nav class="site-navigation d-none d-lg-flex">
+          {% include navigation.html %}
+        </nav>
+        
+        <div class="header-actions">
+          <div class="search-toggle">
+            <button id="search-toggle-btn" aria-label="Search">
+              <i data-feather="search"></i>
+            </button>
+          </div>
+          
+          <div class="dark-mode-toggle">
+            {% include dark-mode-toggle.html %}
+          </div>
+          
+          <div class="mobile-menu-toggle d-lg-none">
+            <button id="menu-toggle-btn" aria-label="Menu">
+              <i data-feather="menu"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="searchBox" class="search-box">
+      {% include search.html %}
+    </div>
+  </div>
+  
+  <div id="mobileMenu" class="mobile-menu d-lg-none">
+    <div class="mobile-menu-inner">
+      <div class="mobile-menu-header">
+        <div class="mobile-search">
+          {% include search.html %}
+        </div>
+      </div>
+      <nav class="mobile-navigation">
+        {% include navigation.html %}
+      </nav>
+    </div>
+  </div>
+  
+  <div id="mobileMenuOverlay" class="mobile-menu-overlay"></div>
+</header>

@@ -1,0 +1,46 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% for page in site.pages %}
+    {% if page.layout != 'null' and page.layout != 'none' and page.title != '404' and page.sitemap != false %}
+    <url>
+      <loc>{{ page.url | absolute_url }}</loc>
+      {% if page.date %}
+      <lastmod>{{ page.date | date_to_xmlschema }}</lastmod>
+      {% else %}
+      <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+      {% endif %}
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+    </url>
+    {% endif %}
+  {% endfor %}
+  
+  {% for post in site.posts %}
+  <url>
+    <loc>{{ post.url | absolute_url }}</loc>
+    <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  {% endfor %}
+  
+  {% for collection in site.collections %}
+    {% unless collection.output == false or collection.label == "posts" %}
+      {% for doc in collection.docs %}
+      <url>
+        <loc>{{ doc.url | absolute_url }}</loc>
+        {% if doc.date %}
+        <lastmod>{{ doc.date | date_to_xmlschema }}</lastmod>
+        {% else %}
+        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+        {% endif %}
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+      </url>
+      {% endfor %}
+    {% endunless %}
+  {% endfor %}
+</urlset>

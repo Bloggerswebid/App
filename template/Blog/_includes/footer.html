@@ -1,0 +1,82 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="footer-info">
+            <h3>{{ site.title }}</h3>
+            <p>{{ site.description }}</p>
+            <div class="social-links">
+              <a href="https://facebook.com/mybusiness" target="_blank" rel="noopener" aria-label="Facebook">
+                <i data-feather="facebook"></i>
+              </a>
+              <a href="https://twitter.com/mybusiness" target="_blank" rel="noopener" aria-label="Twitter">
+                <i data-feather="twitter"></i>
+              </a>
+              <a href="https://instagram.com/mybusiness" target="_blank" rel="noopener" aria-label="Instagram">
+                <i data-feather="instagram"></i>
+              </a>
+              <a href="https://linkedin.com/company/mybusiness" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <i data-feather="linkedin"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-3">
+          <div class="footer-links">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="{{ '/about/' | relative_url }}">About Us</a></li>
+              <li><a href="{{ '/services/' | relative_url }}">Services</a></li>
+              <li><a href="{{ '/portfolio/' | relative_url }}">Portfolio</a></li>
+              <li><a href="{{ '/contact/' | relative_url }}">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-md-2">
+          <div class="footer-links">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="{{ '/privacy/' | relative_url }}">Privacy Policy</a></li>
+              <li><a href="{{ '/terms/' | relative_url }}">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-md-3">
+          <div class="footer-links">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="{{ '/categories/' | relative_url }}">Categories</a></li>
+              <li><a href="{{ '/advertise/' | relative_url }}">Advertise</a></li>
+              <li><a href="{{ '/disclaimer/' | relative_url }}">Disclaimer</a></li>
+              <li><a href="{{ '/feed.xml' | relative_url }}">RSS Feed</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="copyright">
+        <p>&copy; {{ 'now' | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+      </div>
+
+
+      <div class="back-to-top">
+        <a href="#" id="back-to-top-btn" aria-label="Back to top">
+          <i data-feather="chevron-up"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    feather.replace();
+  });
+</script>

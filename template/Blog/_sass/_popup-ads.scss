@@ -1,0 +1,173 @@
+.popup-ad-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  display: flex;
+  justify-content: center;
+  
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    
+    .popup-ad-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .popup-ad-content {
+    position: relative;
+    width: 970px;
+    height: 70px;
+    background-color: #fff;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    display: flex;
+    align-items: center;
+  }
+  
+  .popup-ad-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 24px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    
+    p {
+      margin: 0;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      background-color: rgba(0, 0, 0, 0.05);
+      padding: 2px 8px;
+      border-bottom-right-radius: 4px;
+    }
+  }
+  
+  #popup-ad-countdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: bold;
+    margin-left: 5px;
+  }
+  
+  .popup-ad-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--text-color);
+    border: none;
+    border-radius: 50%;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: not-allowed;
+    z-index: 10;
+    transition: all 0.2s ease;
+    opacity: 0.7;
+    
+    &.active {
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.2);
+      color: var(--text-color);
+      opacity: 1;
+      
+      &:hover {
+        background-color: var(--primary-color);
+        color: white;
+      }
+    }
+    
+    &:focus {
+      outline: none;
+    }
+  }
+  
+  .popup-ad-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #fff;
+    padding-left: 15px;
+    
+    p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-left: 10px;
+    }
+  }
+  
+  .popup-ad-loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(var(--primary-color-rgb), 0.2);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .popup-ad {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    
+    ins.adsbygoogle {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  }
+  
+  @media (max-width: 1000px) {
+    .popup-ad-content {
+      width: 728px;
+      height: 90px;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .popup-ad-content {
+      width: 100%;
+      height: 50px;
+    }
+  }
+}

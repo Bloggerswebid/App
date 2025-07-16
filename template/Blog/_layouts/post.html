@@ -1,0 +1,100 @@
+---
+layout: default
+---
+<div class="post-container col-lg-8">
+  {% include breadcrumbs.html %}
+  
+  <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+      
+      <div class="post-meta">
+        <span class="post-date">
+          <i class="feather-calendar"></i>
+          <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+            {{ page.date | date: "%b %-d, %Y" }}
+          </time>
+        </span>
+        
+        {% if page.author %}
+        <span class="post-author">
+          <i class="feather-user"></i>
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">{{ page.author }}</span>
+          </span>
+        </span>
+        {% endif %}
+        
+        {% include reading-time.html %}
+        
+        {% if page.categories.size > 0 %}
+        <span class="post-categories">
+          <i class="feather-folder"></i>
+          {% for category in page.categories %}
+          <a href="{{ '/category/' | append: category | relative_url }}">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
+          {% endfor %}
+        </span>
+        {% endif %}
+        
+        {% if page.tags.size > 0 %}
+        <span class="post-tags">
+          <i class="feather-tag"></i>
+          {% for tag in page.tags %}
+          <a href="{{ '/tag/' | append: tag | relative_url }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+          {% endfor %}
+        </span>
+        {% endif %}
+      </div>
+    </header>
+    
+    {% if page.image %}
+    <div class="post-featured-image-container">
+      {% include responsive-image.html 
+        src=page.image 
+        alt=page.title 
+        class="img-fluid post-featured-img" 
+        wrapper_class="post-featured-image"
+      %}
+    </div>
+    {% endif %}
+    
+    {% if page.toc %}
+    <div class="post-toc">
+      <h4>Table of Contents</h4>
+      {% include toc.html html=content %}
+    </div>
+    {% endif %}
+    
+    <div class="post-content e-content" itemprop="articleBody">
+      {{ content }}
+    </div>
+    
+    {% include social-share.html %}
+    
+    {% if page.tags.size > 0 %}
+    <div class="post-tags-section">
+      <span class="tags-title">Tags:</span>
+      {% for tag in page.tags %}
+      <a href="{{ '/tag/' | append: tag | relative_url }}" class="tag-button">{{ tag }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if site.disqus.shortname and page.comments %}
+    <div class="post-comments" id="disqus-container">
+      <h3>Comments</h3>
+      <div id="disqus_thread" data-disqus-shortname="{{ site.disqus.shortname }}"></div>
+    </div>
+    {% endif %}
+    
+    {% include related-posts.html %}
+  </article>
+</div>
+
+<div class="sidebar col-lg-4">
+  {% include sidebar.html %}
+</div>
+
+{% if site.disqus.shortname and page.comments %}
+<script src="{{ '/assets/js/disqus-loader.js' | relative_url }}"></script>
+{% endif %}

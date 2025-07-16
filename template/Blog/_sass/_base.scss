@@ -1,0 +1,234 @@
+// Base styles
+
+html {
+  font-size: $base-font-size;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $base-font-family;
+  font-size: 1rem;
+  line-height: $base-line-height;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: $transition-base;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[data-theme="light"] {
+  --bg-color: #{$light-bg-color};
+  --text-color: #{$light-text-color};
+  --heading-color: #{$light-heading-color};
+  --border-color: #{$light-border-color};
+  --link-color: #{$light-link-color};
+  --link-hover-color: #{$light-link-hover-color};
+  --meta-color: #{$light-meta-color};
+  --card-bg: #{$light-card-bg};
+  --card-shadow: #{$light-card-shadow};
+  --navbar-bg: #{$light-navbar-bg};
+  --footer-bg: #{$light-footer-bg};
+  --footer-text: #{$light-footer-text};
+  --search-bg: #{$light-search-bg};
+  --widget-bg: #{$light-widget-bg};
+  --tag-bg: #{$light-tag-bg};
+  --code-bg: #{$light-code-bg};
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --accent-color: #{$accent-color};
+}
+
+[data-theme="dark"] {
+  --bg-color: #{$dark-bg-color};
+  --text-color: #{$dark-text-color};
+  --heading-color: #{$dark-heading-color};
+  --border-color: #{$dark-border-color};
+  --link-color: #{$dark-link-color};
+  --link-hover-color: #{$dark-link-hover-color};
+  --meta-color: #{$dark-meta-color};
+  --card-bg: #{$dark-card-bg};
+  --card-shadow: #{$dark-card-shadow};
+  --navbar-bg: #{$dark-navbar-bg};
+  --footer-bg: #{$dark-footer-bg};
+  --footer-text: #{$dark-footer-text};
+  --search-bg: #{$dark-search-bg};
+  --widget-bg: #{$dark-widget-bg};
+  --tag-bg: #{$dark-tag-bg};
+  --code-bg: #{$dark-code-bg};
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --accent-color: #{$accent-color};
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+  font-family: $heading-font-family;
+  font-weight: 700;
+  line-height: $heading-line-height;
+  color: var(--heading-color);
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+// Links
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: $transition-fast;
+  
+  &:hover,
+  &:focus {
+    color: var(--link-hover-color);
+    text-decoration: none;
+  }
+}
+
+// Lists
+ul, ol {
+  margin: 0 0 $spacing-unit;
+  padding-left: $spacing-unit;
+}
+
+li {
+  > ul,
+  > ol {
+    margin-bottom: 0;
+  }
+}
+
+// Blockquotes
+blockquote {
+  border-left: 4px solid var(--border-color);
+  padding-left: 1rem;
+  margin-left: 0;
+  margin-right: 0;
+  font-style: italic;
+  color: var(--meta-color);
+  
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Code formatting
+pre,
+code {
+  font-family: $monospace-font-family;
+  font-size: 0.9rem;
+  border-radius: $border-radius;
+}
+
+code {
+  padding: 0.2rem 0.4rem;
+  background-color: var(--code-bg);
+}
+
+pre {
+  padding: 1rem;
+  overflow-x: auto;
+  background-color: var(--code-bg);
+  
+  > code {
+    border: 0;
+    padding-right: 0;
+    padding-left: 0;
+    background-color: transparent;
+  }
+}
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+// Figures
+figure {
+  margin: 1rem 0;
+  
+  > img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+figcaption {
+  font-size: 0.9rem;
+  color: var(--meta-color);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+// Tables
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+th, td {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+}
+
+th {
+  background-color: var(--widget-bg);
+  font-weight: 600;
+}
+
+// Helpers
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.wrapper {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.content {
+  flex: 1;
+  padding: $spacing-unit 0;
+}
+
+// Accessibility
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}

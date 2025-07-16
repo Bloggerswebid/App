@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  {% include head.html %}
+</head>
+<body>
+  <div class="wrapper">
+    {% include header.html %}
+    
+    <!-- Header AdSense Ad -->
+    {% if site.adsense.client_id and site.adsense.enable_page_level_ads %}
+    <div class="header-ad-container">
+      <div class="container">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.adsense.client_id }}"
+             crossorigin="anonymous"></script>
+        <!-- HEADER -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="{{ site.adsense.client_id }}"
+             data-ad-slot="{{ site.adsense.ad_slots.header }}"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    </div>
+    {% endif %}
+    
+    <main class="content" aria-label="Content">
+      <div class="container">
+        <div class="row">
+          {{ content }}
+        </div>
+      </div>
+    </main>
+    
+    {% include footer.html %}
+  </div>
+
+  {% include popup-ads.html %}
+  
+  <!-- Essential scripts only -->
+  <script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/dark-mode.js' | relative_url }}" defer></script>
+  
+  <!-- Load non-critical scripts after page is interactive -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Dynamically load search script after page is ready
+      if (document.querySelector('.search-form, .search-toggle')) {
+        const searchScript = document.createElement('script');
+        searchScript.src = "{{ '/assets/js/search-live.js' | relative_url }}";
+        document.body.appendChild(searchScript);
+      }
+      
+      // Load TOC script only on pages that need it
+      if (document.querySelector('.toc-container')) {
+        const tocScript = document.createElement('script');
+        tocScript.src = "{{ '/assets/js/toc.js' | relative_url }}";
+        document.body.appendChild(tocScript);
+      }
+      
+      // Load Disqus script only when comments section is visible
+      if (document.querySelector('.comments-section')) {
+        const disqusScript = document.createElement('script');
+        disqusScript.src = "{{ '/assets/js/disqus-loader.js' | relative_url }}";
+        document.body.appendChild(disqusScript);
+      }
+    });
+  </script>
+  
+  {% if jekyll.environment == 'production' and site.google_analytics %}
+    {% include google-analytics.html %}
+  {% endif %}
+</body>
+</html>

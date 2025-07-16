@@ -1,0 +1,13 @@
+domain=example.com
+articles_per_run=2
+min_word_count=4000
+max_word_count=6000
+h2_min_words=400
+h2_max_words=600
+target_headings=25
+language=Indonesian
+base_categories=Bisnis,Keuangan,Teknologi,Marketing,SEO
+author_name=Admin
+enable_auto_images=true
+images_per_article=4
+min_images_per_article=2

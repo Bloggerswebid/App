@@ -1,0 +1,149 @@
+---
+layout: default
+title: Categories
+permalink: /categories/
+---
+
+<div class="categories-page">
+    <div class="container">
+        <header class="page-header">
+            <h1>📂 Categories</h1>
+            <p>Explore articles by category</p>
+        </header>
+
+        <div class="categories-grid">
+            {% assign categories = site.categories | sort %}
+            {% for category in categories %}
+                <div class="category-card">
+                    <h3><a href="{{ '/categories/' | append: category[0] | slugify | relative_url }}">{{ category[0] }}</a></h3>
+                    <p>{{ category[1] | size }} articles</p>
+                    
+                    <div class="category-posts">
+                        {% for post in category[1] limit: 3 %}
+                            <div class="post-preview">
+                                <h4><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h4>
+                                <time>{{ post.date | date: "%B %d, %Y" }}</time>
+                            </div>
+                        {% endfor %}
+                        
+                        {% if category[1].size > 3 %}
+                            <div class="more-posts">
+                                <a href="{{ '/categories/' | append: category[0] | slugify | relative_url }}">View all {{ category[1].size }} articles →</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+.categories-page {
+    padding: 2rem 0;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.category-card {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.category-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.category-card h3 a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.category-card h3 a:hover {
+    text-decoration: underline;
+}
+
+.category-posts {
+    margin-top: 1.5rem;
+}
+
+.post-preview {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.post-preview:last-child {
+    border-bottom: none;
+}
+
+.post-preview h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.post-preview h4 a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.post-preview h4 a:hover {
+    color: var(--primary-color);
+}
+
+.post-preview time {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.more-posts {
+    text-align: center;
+    padding-top: 1rem;
+}
+
+.more-posts a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.more-posts a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .categories-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .category-card {
+        padding: 1.5rem;
+    }
+}
+</style>

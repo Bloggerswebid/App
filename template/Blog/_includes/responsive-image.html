@@ -1,0 +1,56 @@
+
+{% comment %}
+Usage examples:
+- Basic usage: 
+  {% include responsive-image.html src=page.featured_image alt=page.title %}
+
+- With additional classes:
+  {% include responsive-image.html src=page.featured_image alt=page.title class="additional-class" wrapper_class="wrapper-class" %}
+
+- Generate image from title (requires site.generate_images_from_title=true in _config.yml):
+  {% include responsive-image.html generate_from_title=true title=page.title alt=page.title %}
+{% endcomment %}
+
+{% assign image_src = include.src %}
+{% assign default_image = '/assets/images/default-thumbnail.svg' %}
+
+{% comment %} Handle different image sources {% endcomment %}
+{% if image_src %}
+  {% comment %} Check if it's an external URL {% endcomment %}
+  {% if image_src contains 'http://' or image_src contains 'https://' %}
+    {% assign final_image_src = image_src %}
+  {% else %}
+    {% comment %} Handle internal/relative paths {% endcomment %}
+    {% if image_src contains '/assets/' %}
+      {% assign final_image_src = image_src | relative_url %}
+    {% else %}
+      {% assign final_image_src = '/assets/img/' | append: image_src | relative_url %}
+    {% endif %}
+  {% endif %}
+{% else %}
+  {% assign final_image_src = default_image | relative_url %}
+{% endif %}
+
+<div class="responsive-image-container {% if include.wrapper_class %}{{ include.wrapper_class }}{% endif %}"
+     data-title="{{ include.alt | default: site.title }}"
+     data-default-image="{{ default_image | relative_url }}"
+     {% if include.generate_from_title %}data-generated="true"{% endif %}>
+  <noscript>
+    <img src="{{ final_image_src }}" 
+         alt="{{ include.alt | default: 'Image' }}" 
+         class="responsive-image no-js {% if include.class %}{{ include.class }}{% endif %}">
+  </noscript>
+  <img 
+    src="{{ final_image_src }}"
+    alt="{{ include.alt | default: 'Image' }}" 
+    class="responsive-image {% if include.class %}{{ include.class }}{% endif %}" 
+    loading="lazy" 
+    decoding="async"
+    onerror="this.onerror=null;this.src='{{ default_image | relative_url }}';this.classList.add('image-fallback');this.setAttribute('data-original-src', '{{ final_image_src }}');if(window.imageFallbackCallback)window.imageFallbackCallback(this);"
+    {% if include.width %}width="{{ include.width }}"{% endif %}
+    {% if include.height %}height="{{ include.height }}"{% endif %}
+  >
+  {% if include.caption %}
+  <figcaption class="image-caption">{{ include.caption }}</figcaption>
+  {% endif %}
+</div>

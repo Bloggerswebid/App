@@ -1,0 +1,48 @@
+{% assign post = include.post %}
+<article class="featured-post-card">
+  <div class="featured-post-image-wrapper">
+    {% if post.featured_image %}
+      <img 
+        src="{{ post.featured_image | relative_url }}" 
+        alt="{{ post.title }}" 
+        class="lazy featured-post-image"
+        loading="lazy"
+        data-src="{{ post.featured_image | relative_url }}">
+    {% elsif site.generate_images_from_title %}
+      <div class="generated-image">
+        <div class="title-image">{{ post.title | truncate: 25 }}</div>
+      </div>
+    {% endif %}
+    {% if post.categories.size > 0 and site.featured_posts.display_categories %}
+      <div class="featured-post-categories">
+        {% for category in post.categories limit:1 %}
+          <a href="{{ site.baseurl }}/category/{{ category | slugify }}" class="post-category">{{ category }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+  <div class="featured-post-content">
+    <h3 class="featured-post-title">
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </h3>
+    
+    {% if site.featured_posts.display_author or site.featured_posts.display_date %}
+    <div class="featured-post-meta">
+      {% if site.featured_posts.display_author %}
+        <span class="featured-post-author">
+          <i class="fas fa-user"></i> {{ post.author }}
+        </span>
+      {% endif %}
+      {% if site.featured_posts.display_date %}
+        <span class="featured-post-date">
+          <i class="fas fa-calendar-alt"></i> {{ post.date | date: "%d %b %Y" }}
+        </span>
+      {% endif %}
+    </div>
+    {% endif %}
+    
+    <!-- Excerpt removed as requested -->
+    
+    <a href="{{ post.url | relative_url }}" class="read-more-link">Baca Selengkapnya <i class="fas fa-angle-right"></i></a>
+  </div>
+</article>

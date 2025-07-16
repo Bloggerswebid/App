@@ -1,0 +1,28 @@
+---
+layout: null
+---
+User-agent: *
+Allow: /
+
+# Sitemap and Feed locations for better SEO
+Sitemap: {{ '/sitemap.xml' | absolute_url }}
+Sitemap: {{ '/feed.xml' | absolute_url }}
+
+# Allow important content for indexing
+Allow: /posts/
+Allow: /categories/
+Allow: /tags/
+Allow: /about/
+Allow: /contact/
+Allow: /services/
+Allow: /portfolio/
+
+# Disallow unnecessary files and admin areas
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /*.txt$
+Disallow: /search/
+Disallow: /_*
+
+# Optimized crawl delay for better performance
+Crawl-delay: 1

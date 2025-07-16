@@ -1,0 +1,109 @@
+// Dark mode styles
+
+// Theme toggle button
+.theme-toggle {
+  position: relative;
+  
+  #theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 0.5rem;
+    line-height: 1;
+    border-radius: $border-radius;
+    transition: $transition-fast;
+    
+    &:hover {
+      background-color: var(--search-bg);
+    }
+    
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .light-icon {
+      display: block;
+    }
+    
+    .dark-icon {
+      display: none;
+    }
+  }
+}
+
+// Apply dark mode
+[data-theme="dark"] {
+  .theme-toggle {
+    #theme-toggle-btn {
+      .light-icon {
+        display: none;
+      }
+      
+      .dark-icon {
+        display: block;
+      }
+    }
+  }
+  
+  a {
+    &:hover {
+      color: var(--link-hover-color);
+    }
+  }
+  
+  // Additional dark mode specific styles
+  .post-card {
+    background-color: var(--card-bg);
+    
+    &:hover {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+  }
+  
+  .widget {
+    background-color: var(--card-bg);
+  }
+  
+  input[type="search"], 
+  input[type="text"], 
+  input[type="email"], 
+  textarea {
+    background-color: var(--search-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+    
+    &:focus {
+      border-color: var(--link-color);
+    }
+  }
+  
+  // Tables in dark mode
+  table {
+    th {
+      background-color: var(--widget-bg);
+    }
+  }
+}
+
+// Dark mode transition
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.site-header,
+.site-footer,
+.post-card,
+.widget,
+.page-link,
+.tag-button,
+input, 
+textarea, 
+select, 
+button {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}

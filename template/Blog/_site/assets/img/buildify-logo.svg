@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="150" viewBox="0 0 450 150">
+  <style>
+    .logo-text {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .tagline {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+    }
+    @media (max-width: 500px) {
+      .tagline { font-size: 12px; }
+    }
+  </style>
+  <defs>
+    <linearGradient id="smartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4285F4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#34A853;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Smart Home Icon -->
+  <g transform="translate(30, 75) scale(0.05, -0.05)">
+    <!-- House Shape -->
+    <path d="M500 800 l-500 -300 100 0 100 0 0 -300 0 -300 800 0 800 0 0 300 0 300 100 0 100 0 -500 300 c-275 165 -502 300 -505 300 -3 0 -230 -135 -505 -300z" fill="url(#smartGradient)"/>
+
+    <!-- Smart Home Windows -->
+    <path d="M400 200 l0 -200 200 0 200 0 0 200 0 200 -200 0 -200 0 0 -200z" fill="#FFFFFF"/>
+    <path d="M900 200 l0 -200 200 0 200 0 0 200 0 200 -200 0 -200 0 0 -200z" fill="#FFFFFF"/>
+
+    <!-- IoT Connection Lines -->
+    <path d="M600 600 l0 -100 100 0 100 0 0 -150 0 -150 100 0 100 0 0 150 0 150 100 0 100 0 0 100 0 100 -300 0 -300 0 0 -100z" fill="#FFFFFF" fill-opacity="0.3"/>
+  </g>
+
+  <!-- Brand Name -->
+  <text x="120" y="75" class="logo-text" fill="#222" font-size="46">cartlab</text>
+  <text x="320" y="75" class="logo-text" fill="#4285F4" font-size="46">.web.id</text>
+
+  <!-- Tagline -->
+  <text x="120" y="105" class="tagline" fill="#555">Smart Way to Find Your Dream Home</text>
+</svg>

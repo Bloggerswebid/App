@@ -1,0 +1,24 @@
+
+# Main Navigation
+main:
+  - title: "Home"
+    url: "/"  
+  - title: "Categories"
+    url: "/categories/"
+  - title: "About"
+    url: "/about/"
+  - title: "Contact"
+    url: "/contact/"
+
+# Footer Navigation
+footer:
+  company:
+    - title: "About"
+      url: "/about/"
+    - title: "Home" 
+      url: "/"     
+       
+  support:
+    - title: "Contact"
+      url: "/contact/"
+

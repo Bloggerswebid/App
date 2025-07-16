@@ -1,0 +1,410 @@
+// Header
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: $z-index-fixed;
+  background-color: var(--navbar-bg);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.1);
+  border-bottom: 1px solid var(--border-color);
+  
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    min-height: 60px;
+  }
+  
+  .site-branding {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    
+    .site-logo {
+      display: block;
+      
+      .logo-img {
+        height: 40px;
+        width: auto;
+      }
+      
+      .site-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--heading-color);
+      }
+    }
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    
+    @media (max-width: 991px) {
+      gap: 0.75rem;
+    }
+  }
+  
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    button {
+      background: transparent;
+      border: none;
+      color: var(--text-color);
+      cursor: pointer;
+      padding: 0.6rem;
+      line-height: 1;
+      border-radius: $border-radius;
+      transition: $transition-fast;
+      
+      &:hover {
+        background-color: var(--search-bg);
+      }
+      
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+  
+  .search-box {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: $border-radius;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    padding: 1rem;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 0.5rem;
+    
+    &.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .search-form {
+      max-width: 600px;
+      margin: 0 auto;
+      
+      .input-group {
+        input[type="search"] {
+          height: 44px;
+          font-size: 0.95rem;
+          
+          &:focus {
+            border-color: var(--link-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+          }
+        }
+        
+        .search-btn {
+          height: 44px;
+          width: 44px;
+          
+          &:hover {
+            background-color: var(--hover-bg);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Site Navigation
+.site-navigation {
+  display: flex;
+  align-items: center;
+  
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    gap: 0.25rem;
+    
+    > li {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 40px;
+      
+      > a {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: 0 1rem;
+        color: var(--text-color);
+        font-weight: 500;
+        font-size: 0.85rem;
+        letter-spacing: 0.01em;
+        transition: all 0.3s ease;
+        border-radius: 6px;
+        white-space: nowrap;
+        text-decoration: none;
+        line-height: 1;
+        
+        &:hover {
+          color: var(--link-color);
+          background-color: rgba(var(--link-color-rgb, 74, 108, 247), 0.1);
+        }
+        
+        &.active {
+          color: var(--link-color);
+          background-color: rgba(var(--link-color-rgb, 74, 108, 247), 0.15);
+        }
+      }
+      
+      &.menu-item-has-children {
+        > a {
+          padding-right: 2rem;
+          position: relative;
+          
+          &::after {
+            content: "";
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid currentColor;
+            position: absolute;
+            top: 50%;
+            right: 0.85rem;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease;
+          }
+        }
+        
+        &:hover {
+          > a::after {
+            transform: translateY(-50%) rotate(180deg);
+          }
+          
+          > .sub-menu {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      }
+      
+      &:hover, &:focus, &:active {
+        > a {
+          color: var(--link-color);
+        }
+      }
+    }
+    
+    .sub-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 220px;
+      background-color: white;
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+      padding: 0.75rem 0;
+      margin: 0;
+      list-style: none;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.25s ease-in-out;
+      z-index: $z-index-dropdown;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: -6px;
+        left: 2rem;
+        width: 12px;
+        height: 12px;
+        background: white;
+        border-left: 1px solid var(--border-color);
+        border-top: 1px solid var(--border-color);
+        transform: rotate(45deg);
+      }
+      
+      li {
+        position: relative;
+        
+        &:not(:last-child) {
+          border-bottom: 1px solid rgba(0,0,0,0.04);
+        }
+        
+        a {
+          display: block;
+          padding: 0.65rem 1.5rem;
+          color: var(--text-color);
+          font-size: 0.9rem;
+          font-weight: 500;
+          transition: all 0.2s ease;
+          
+          &:hover {
+            background-color: rgba(0,0,0,0.03);
+            color: var(--link-color);
+            padding-left: 1.75rem;
+          }
+        }
+      }
+    }
+  }
+  
+  .mobile-menu {
+    display: none;
+  }
+}
+
+// Mobile Navigation
+.mobile-menu-toggle {
+  display: none;
+}
+
+// Header Ad Container
+.header-ad-container {
+  padding: 1rem 0;
+  background-color: var(--light-bg, #f8f9fa);
+  border-bottom: 1px solid var(--border-color);
+}
+
+// Main content area
+.content {
+  margin-bottom: 2rem;
+}
+
+// Footer
+.site-footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  padding: $spacing-unit 0;
+  margin-top: auto;
+  
+  .footer-top {
+    padding-bottom: $spacing-unit;
+    border-bottom: 1px solid var(--border-color);
+    
+    h3 {
+      color: var(--heading-color);
+      margin-top: 0;
+      font-size: 1.25rem;
+    }
+    
+    h4 {
+      color: var(--heading-color);
+      margin-top: 0;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-info {
+      p {
+        margin-bottom: 1rem;
+      }
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: $border-radius-circle;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--footer-text);
+        transition: $transition-fast;
+        
+        &:hover {
+          background-color: var(--link-color);
+          color: white;
+          transform: translateY(-3px);
+        }
+        
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+    
+    .footer-links {
+      ul {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0;
+        
+        li {
+          margin-bottom: 0.5rem;
+          
+          a {
+            color: var(--footer-text);
+            
+            &:hover {
+              color: var(--link-color);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    
+    .copyright {
+      font-size: 0.9rem;
+      
+      p {
+        margin-bottom: 0;
+      }
+    }
+    
+    .back-to-top {
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: $border-radius-circle;
+        background-color: var(--card-bg);
+        box-shadow: var(--card-shadow);
+        color: var(--text-color);
+        transition: $transition-fast;
+        
+        &:hover {
+          background-color: var(--link-color);
+          color: white;
+          transform: translateY(-3px);
+        }
+        
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+}

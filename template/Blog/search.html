@@ -1,0 +1,24 @@
+---
+layout: page
+title: Search
+permalink: /search/
+---
+
+<div class="search-page">
+  <div class="search-form">
+    <form role="search" method="get" action="/search/">
+      <div class="input-group">
+        <input type="search" name="q" id="search-input" class="form-control" placeholder="Search..." aria-label="Search">
+        <button type="submit" class="search-btn">
+          <i data-feather="search"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  <div id="search-results" class="search-results">
+    <p class="search-instructions">Enter your search terms above to find content on this site.</p>
+  </div>
+</div>
+
+<script src="{{ '/assets/js/search.js' | relative_url }}"></script>

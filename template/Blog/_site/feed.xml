@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MyBusiness</title>
+    <description>Business Ideas blog - Discover innovative business strategies, entrepreneurship tips, and modern solutions for growing your business.</description>
+    <link>http://0.0.0.0:5000/</link>
+    <atom:link href="http://0.0.0.0:5000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 15 Jul 2025 15:52:20 +0000</pubDate>
+    <lastBuildDate>Tue, 15 Jul 2025 15:52:20 +0000</lastBuildDate>
+    <generator>Jekyll v4.2.2</generator>
+    
+    
+  </channel>
+</rss>

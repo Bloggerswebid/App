@@ -1,0 +1,34 @@
+{% comment %}
+  Performance optimizations for Jekyll website
+  - Resource hints
+  - Optimized loading of external assets
+  - Browser caching directives
+{% endcomment %}
+
+<!-- DNS Prefetch for faster domain lookups -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+{% if site.disqus.shortname %}<link rel="dns-prefetch" href="//{{ site.disqus.shortname }}.disqus.com">{% endif %}
+{% if site.google_analytics %}<link rel="dns-prefetch" href="//www.google-analytics.com">{% endif %}
+
+<!-- Modern browsers - tell browsers to start early connections -->
+<link rel="preconnect" crossorigin href="https://fonts.googleapis.com">
+<link rel="preconnect" crossorigin href="https://fonts.gstatic.com">
+<link rel="preconnect" crossorigin href="https://cdn.jsdelivr.net">
+<link rel="preconnect" crossorigin href="https://cdnjs.cloudflare.com">
+
+<!-- Preload critical resources -->
+<link rel="preload" href="{{ '/assets/images/default-thumbnail.svg' | relative_url }}" as="image" type="image/svg+xml">
+
+<!-- Force favicon to render -->
+<link rel="icon" href="{{ '/favicon.ico' | relative_url }}" type="image/x-icon">
+
+<!-- Browser caching hints via HTTP headers -->
+{% if jekyll.environment == 'production' %}
+<meta http-equiv="Cache-Control" content="public, max-age=86400, must-revalidate">
+{% else %}
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+{% endif %}

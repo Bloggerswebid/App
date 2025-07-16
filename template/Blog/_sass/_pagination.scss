@@ -1,0 +1,70 @@
+// Pagination
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  
+  ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .page-item {
+    margin: 0 0.25rem;
+    
+    .page-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 0.75rem;
+      min-width: 40px;
+      height: 40px;
+      border-radius: $border-radius;
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      font-weight: 500;
+      transition: $transition-fast;
+      
+      &:hover {
+        background-color: var(--link-color);
+        border-color: var(--link-color);
+        color: white;
+      }
+      
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+    
+    &.active .page-link {
+      background-color: var(--link-color);
+      border-color: var(--link-color);
+      color: white;
+    }
+    
+    &.disabled .page-link {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    
+    &.previous, &.next {
+      .page-link {
+        display: flex;
+        align-items: center;
+      }
+    }
+    
+    &.previous .page-link svg {
+      margin-right: 0.25rem;
+    }
+    
+    &.next .page-link svg {
+      margin-left: 0.25rem;
+    }
+  }
+}

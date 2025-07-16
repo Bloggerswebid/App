@@ -1,0 +1,64 @@
+<article class="post-card h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="post-card-inner">
+    <a href="{{ include.post.url | relative_url }}" class="post-card-image-link u-url" itemprop="url">
+      {% include responsive-image.html 
+        src=include.post.image 
+        alt=include.post.title 
+        wrapper_class="post-card-image"
+        generate_from_title=false
+        title=include.post.title
+      %}
+      
+      {% if include.post.categories and include.post.categories.size > 0 %}
+      <div class="post-card-categories">
+        {% for category in include.post.categories limit:1 %}
+        <span class="post-card-category p-category" itemprop="keywords">{{ category }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </a>
+    
+    <div class="post-card-content">
+      <h3 class="post-card-title p-name" itemprop="headline">
+        <a href="{{ include.post.url | relative_url }}" class="u-url">{{ include.post.title }}</a>
+      </h3>
+      
+      <div class="post-meta">
+        <time class="post-date dt-published" datetime="{{ include.post.date | date_to_xmlschema }}" itemprop="datePublished">
+          <i class="icon fa fa-calendar"></i>
+          {{ include.post.date | date: "%d %b %Y" }}
+        </time>
+        
+        {% if include.post.author %}
+        <span class="post-author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <i class="icon fa fa-user"></i>
+          <span itemprop="name">{{ include.post.author }}</span>
+        </span>
+        {% endif %}
+        
+        {% if include.post.comments %}
+        <span class="post-comments">
+          <i class="icon fa fa-comment"></i>
+          <span>comment</span>
+        </span>
+        {% endif %}
+        
+        {% if include.post.tags.size > 0 %}
+        <meta itemprop="keywords" content="{% for tag in include.post.tags %}{{ tag }}{% unless forloop.last %}, {% endunless %}{% endfor %}">
+        {% endif %}
+      </div>
+      
+      <div class="post-excerpt p-summary" itemprop="description">
+        {% if include.post.excerpt %}
+          {{ include.post.excerpt | strip_html | truncatewords: 18 }}
+        {% endif %}
+      </div>
+      
+      <div class="post-readmore">
+        <a href="{{ include.post.url | relative_url }}" class="btn-readmore" aria-label="Baca artikel {{ include.post.title }}">
+          Read more <i class="icon fa fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</article>

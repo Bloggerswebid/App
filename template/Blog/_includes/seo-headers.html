@@ -1,0 +1,7 @@
+{% if page.layout == 'post' or page.layout == 'home' or page.layout == 'category' or page.layout == 'tag' %}
+  <meta http-equiv="X-Robots-Tag" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+{% elsif page.noindex %}
+  <meta http-equiv="X-Robots-Tag" content="noindex, nofollow" />
+{% else %}
+  <meta http-equiv="X-Robots-Tag" content="index, follow" />
+{% endif %}

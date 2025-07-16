@@ -1,0 +1,233 @@
+---
+layout: default
+title: Semua Tag
+---
+
+<div class="container mt-4">
+  <div class="tags-header mb-4">
+    <h1 class="tags-title mb-2">{{ page.title }}</h1>
+    <p class="tags-description">Pilih tag di bawah ini untuk melihat artikel-artikel terkait.</p>
+  </div>
+  
+  <div class="tags-grid-section mb-5">
+    <div class="row">
+      {% assign tags = site.tags | sort %}
+      {% for tag in tags %}
+        {% assign tag_name = tag[0] %}
+        {% assign tag_count = tag[1].size %}
+        {% assign tag_slug = tag_name | downcase | replace: ' ', '-' %}
+        
+        <div class="col-md-6 col-lg-4 mb-4">
+          <a href="/tag/{{ tag_slug }}/" class="tag-card">
+            <div class="tag-icon">
+              <i class="fas fa-tag"></i>
+            </div>
+            <h3 class="tag-name">{{ tag_name }}</h3>
+            <div class="tag-post-count">
+              {{ tag_count }} Artikel
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+  <div class="category-section mt-5">
+    <h2 class="section-title mb-4">Lihat berdasarkan Kategori</h2>
+    <div class="row">
+      {% assign sorted_categories = site.categories | sort %}
+      {% for category in sorted_categories limit:6 %}
+        {% assign category_name = category[0] %}
+        {% assign category_count = category[1].size %}
+        {% assign category_slug = category_name | downcase | replace: ' ', '-' %}
+        
+        <div class="col-md-6 col-lg-4 mb-4">
+          <a href="/category/{{ category_slug }}/" class="category-link-card">
+            {% assign icon_class = "fa-folder" %}
+            {% case category_name %}
+              {% when "Blogger" %}
+                {% assign icon_class = "fa-blog" %}
+              {% when "WordPress" %}
+                {% assign icon_class = "fa-wordpress" %}
+              {% when "Tutorial" %}
+                {% assign icon_class = "fa-book-open" %}
+              {% when "Tips" %}
+                {% assign icon_class = "fa-lightbulb" %}
+              {% when "SEO" %}
+                {% assign icon_class = "fa-search" %}
+              {% when "Monetisasi" %}
+                {% assign icon_class = "fa-dollar-sign" %}
+              {% else %}
+                {% assign icon_class = "fa-folder" %}
+            {% endcase %}
+            <i class="fas {{ icon_class }}"></i>
+            <span>{{ category_name }}</span>
+            <span class="category-count">({{ category_count }})</span>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    {% if site.categories.size > 6 %}
+      <div class="text-center mt-4">
+        <a href="/categories/" class="btn btn-primary">Lihat semua kategori</a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  /* Tag Index Page Styles */
+  .tags-header {
+    background-color: var(--widget-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .tags-title {
+    font-size: 1.75rem;
+    color: var(--heading-color);
+  }
+  
+  .tags-description {
+    color: var(--meta-color);
+    margin-bottom: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  .tag-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: var(--widget-bg);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    height: 100%;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .tag-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+    border-color: #28a745;
+  }
+  
+  .tag-icon {
+    font-size: 2.5rem;
+    color: #28a745;
+    margin-bottom: 1rem;
+  }
+  
+  .tag-name {
+    font-size: 1.25rem;
+    color: var(--heading-color);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+  
+  .tag-post-count {
+    color: var(--meta-color);
+    font-size: 0.9rem;
+  }
+  
+  .section-title {
+    position: relative;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+    color: var(--heading-color);
+  }
+  
+  .section-title:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #0d6efd;
+  }
+  
+  .category-link-card {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: var(--widget-bg);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    height: 100%;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-weight: 500;
+  }
+  
+  .category-link-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border-color: #0d6efd;
+    color: #0d6efd;
+  }
+  
+  .category-link-card i {
+    font-size: 1.2rem;
+    color: #0d6efd;
+    margin-right: 0.75rem;
+  }
+  
+  .category-count {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: var(--meta-color);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .tag-card {
+      padding: 1.5rem 1rem;
+    }
+    
+    .tag-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .tag-name {
+      font-size: 1.1rem;
+    }
+    
+    .category-link-card {
+      padding: 0.75rem 1rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .tags-header {
+      padding: 1.25rem;
+    }
+    
+    .tags-title {
+      font-size: 1.5rem;
+    }
+    
+    .tags-description {
+      font-size: 0.9rem;
+    }
+    
+    .category-link-card i {
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+    
+    .section-title {
+      font-size: 1.25rem;
+    }
+  }
+</style>

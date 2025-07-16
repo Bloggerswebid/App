@@ -1,0 +1,118 @@
+.nav-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  gap: 1rem;
+
+  li {
+    position: relative;
+    
+    a {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      color: var(--text-color);
+      text-decoration: none;
+      white-space: nowrap;
+      
+      &:hover {
+        color: var(--link-color);
+      }
+    }
+  }
+}
+
+// Breadcrumbs
+.breadcrumbs {
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--meta-color);
+  
+  a {
+    color: var(--meta-color);
+    
+    &:hover {
+      color: var(--link-color);
+    }
+  }
+  
+  .breadcrumb-separator {
+    margin: 0 0.5rem;
+  }
+}
+
+// Pagination
+.pagination {
+  margin: 2rem 0;
+  
+  .pagination-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding-left: 0;
+    gap: 0.5rem;
+    margin-bottom: 0;
+  }
+  
+  .page-item {
+    .page-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1rem;
+      border-radius: $border-radius;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      min-width: 40px;
+      transition: $transition-fast;
+      
+      &:hover {
+        background-color: var(--link-color);
+        color: white;
+        border-color: var(--link-color);
+      }
+      
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+    
+    &.active .page-link {
+      background-color: var(--link-color);
+      color: white;
+      border-color: var(--link-color);
+    }
+    
+    &.disabled .page-link {
+      opacity: 0.5;
+      cursor: not-allowed;
+      
+      &:hover {
+        background-color: var(--card-bg);
+        color: var(--text-color);
+        border-color: var(--border-color);
+      }
+    }
+    
+    &.previous .page-link {
+      padding-left: 0.75rem;
+      
+      svg {
+        margin-right: 0.25rem;
+      }
+    }
+    
+    &.next .page-link {
+      padding-right: 0.75rem;
+      
+      svg {
+        margin-left: 0.25rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<ul class="nav-menu">
+  {% for item in site.data.navigation.main %}
+    {% if item.submenu %}
+      <li class="menu-item-has-children">
+        <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+        <ul class="sub-menu">
+          {% for subitem in item.submenu %}
+            <li><a href="{{ subitem.url | relative_url }}">{{ subitem.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% else %}
+      <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
+    {% endif %}
+  {% endfor %}
+</ul>

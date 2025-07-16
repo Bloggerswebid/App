@@ -1,0 +1,148 @@
+<div class="related-posts">
+  <h3>Related Articles</h3>
+  <div class="related-posts-grid">
+    {% assign maxRelated = 4 %}
+    {% assign minCommonTags = 1 %}
+    {% assign maxRelatedCounter = 0 %}
+    
+    {% comment %} First try to find posts with common tags {% endcomment %}
+    {% for post in site.posts %}
+      {% assign sameTagCount = 0 %}
+      {% assign commonTags = '' %}
+      
+      {% for tag in post.tags %}
+        {% if post.url != page.url %}
+          {% if page.tags contains tag %}
+            {% assign sameTagCount = sameTagCount | plus: 1 %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      
+      {% if sameTagCount >= minCommonTags and post.url != page.url %}
+        {% if maxRelatedCounter < maxRelated %}
+          <div class="related-post-card">
+            <a href="{{ post.url | relative_url }}" class="related-post-link">
+              {% include responsive-image.html 
+                src=post.image 
+                alt=post.title 
+                wrapper_class="related-post-image"
+              %}
+            </a>
+            <div class="related-post-content">
+              <h4 class="related-post-title">
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              </h4>
+              <div class="related-post-meta">
+                <span class="post-date">
+                  <i class="feather-calendar"></i>
+                  {{ post.date | date: "%d %b %Y" }}
+                </span>
+                {% if post.categories.size > 0 %}
+                <span class="post-category">
+                  <i class="feather-folder"></i>
+                  {{ post.categories[0] }}
+                </span>
+                {% endif %}
+              </div>
+              {% if post.excerpt %}
+              <div class="related-post-excerpt">
+                {{ post.excerpt | strip_html | truncatewords: 15 }}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          {% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    
+    {% comment %} If no related posts found by tags, show posts from same category {% endcomment %}
+    {% if maxRelatedCounter == 0 %}
+      {% for post in site.posts %}
+        {% if post.url != page.url and maxRelatedCounter < maxRelated %}
+          {% assign sameCategory = false %}
+          {% for category in post.categories %}
+            {% if page.categories contains category %}
+              {% assign sameCategory = true %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+          
+          {% if sameCategory %}
+            <div class="related-post-card">
+              <a href="{{ post.url | relative_url }}" class="related-post-link">
+                {% include responsive-image.html 
+                  src=post.image 
+                  alt=post.title 
+                  wrapper_class="related-post-image"
+                %}
+              </a>
+              <div class="related-post-content">
+                <h4 class="related-post-title">
+                  <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                </h4>
+                <div class="related-post-meta">
+                  <span class="post-date">
+                    <i class="feather-calendar"></i>
+                    {{ post.date | date: "%d %b %Y" }}
+                  </span>
+                  {% if post.categories.size > 0 %}
+                  <span class="post-category">
+                    <i class="feather-folder"></i>
+                    {{ post.categories[0] }}
+                  </span>
+                  {% endif %}
+                </div>
+                {% if post.excerpt %}
+                <div class="related-post-excerpt">
+                  {{ post.excerpt | strip_html | truncatewords: 15 }}
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            {% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    
+    {% comment %} If still no related posts, show latest posts {% endcomment %}
+    {% if maxRelatedCounter == 0 %}
+      {% for post in site.posts limit:4 %}
+        {% if post.url != page.url %}
+          <div class="related-post-card">
+            <a href="{{ post.url | relative_url }}" class="related-post-link">
+              {% include responsive-image.html 
+                src=post.image 
+                alt=post.title 
+                wrapper_class="related-post-image"
+              %}
+            </a>
+            <div class="related-post-content">
+              <h4 class="related-post-title">
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              </h4>
+              <div class="related-post-meta">
+                <span class="post-date">
+                  <i class="feather-calendar"></i>
+                  {{ post.date | date: "%d %b %Y" }}
+                </span>
+                {% if post.categories.size > 0 %}
+                <span class="post-category">
+                  <i class="feather-folder"></i>
+                  {{ post.categories[0] }}
+                </span>
+                {% endif %}
+              </div>
+              {% if post.excerpt %}
+              <div class="related-post-excerpt">
+                {{ post.excerpt | strip_html | truncatewords: 15 }}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,20 @@
+---
+layout: default
+---
+<div class="page-container col-lg-8">
+  {% include breadcrumbs.html %}
+  
+  <article class="page">
+    <header class="page-header">
+      <h1 class="page-title">{{ page.title | escape }}</h1>
+    </header>
+    
+    <div class="page-content">
+      {{ content }}
+    </div>
+  </article>
+</div>
+
+<div class="sidebar col-lg-4">
+  {% include sidebar.html %}
+</div>

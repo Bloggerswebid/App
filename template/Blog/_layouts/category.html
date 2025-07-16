@@ -1,0 +1,228 @@
+---
+layout: default
+---
+<div class="container mt-4">
+  <div class="category-header mb-4">
+    <h1 class="category-title mb-3"><i class="fas fa-folder-open me-2"></i>{{ page.title }}</h1>
+    
+    <!-- Category Navigation Menu -->
+    <div class="category-navigation">
+      <div class="category-menu mb-4">
+        {% for category in site.categories %}
+          {% assign category_name = category[0] %}
+          {% assign is_active = false %}
+          {% if category_name == page.title %}
+            {% assign is_active = true %}
+          {% endif %}
+          <a href="/category/{{ category_name | slugify }}/" class="category-button {% if is_active %}active{% endif %}">
+            {{ category_name }}
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Post Grid - Similar to homepage -->
+  <div class="post-grid-container">
+    <div class="row g-4">
+      {% assign has_posts = false %}
+      {% assign category_id = page.title | downcase %}
+      {% assign category_name = page.title %}
+      
+      {% for post in site.posts %}
+        {% assign post_categories_downcase = post.categories | map: "downcase" %}
+        {% if post.categories contains category_id or post.categories contains category_name or post_categories_downcase contains category_id %}
+          {% assign has_posts = true %}
+          <div class="col-md-6 col-lg-4 post-grid-item">
+            {% include post-card.html post=post %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    
+    {% if has_posts == false %}
+      <div class="no-posts-message alert alert-info text-center my-4">
+        <i class="fas fa-info-circle me-2"></i> Belum ada artikel dalam kategori ini.
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Category search functionality
+    const searchInput = document.getElementById('category-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const postItems = document.querySelectorAll('.post-grid-item');
+        
+        postItems.forEach(item => {
+          const title = item.querySelector('.card-title').textContent.toLowerCase();
+          if (title.includes(searchTerm)) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    }
+    
+    // Filter buttons functionality
+    const filterButtons = document.querySelectorAll('[data-filter]');
+    if (filterButtons.length) {
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Toggle active class
+          document.querySelector('[data-filter].active').classList.remove('active');
+          this.classList.add('active');
+          
+          const filter = this.getAttribute('data-filter');
+          const postItems = document.querySelectorAll('.post-grid-item');
+          
+          // Apply filter logic based on filter type
+          if (filter === 'all') {
+            postItems.forEach(item => item.style.display = '');
+          } else if (filter === 'newest') {
+            // This is simplified - in a real implementation we'd sort by date
+            const posts = Array.from(postItems);
+            posts.sort((a, b) => {
+              // Add actual sorting logic based on post dates
+              return 0; // Placeholder for actual comparison
+            });
+            
+            // Reorder in DOM
+            const parent = posts[0].parentNode;
+            posts.forEach(post => parent.appendChild(post));
+          }
+          // Add logic for 'popular' filter
+        });
+      });
+    }
+  });
+</script>
+
+<style>
+  /* Category Header Styles */
+  .category-header {
+    background-color: var(--widget-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .category-title {
+    font-size: 1.75rem;
+    color: var(--heading-color);
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+  
+  .category-title i {
+    color: #0d6efd;
+    margin-right: 0.75rem;
+  }
+  
+  /* Category Menu Styles */
+  .category-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.25rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.25rem;
+  }
+  
+  .category-button {
+    display: inline-block;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    min-width: 120px;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  
+  .category-button:hover,
+  .category-button.active {
+    background-color: #0d6efd;
+    color: white;
+    transform: translateY(-3px);
+    border-color: #0d6efd;
+    box-shadow: 0 4px 10px rgba(13, 110, 253, 0.2);
+  }
+
+  /* Post Grid Container */
+  .post-grid-container {
+    margin-bottom: 2rem;
+  }
+  
+  .post-grid-item {
+    transition: transform 0.3s ease;
+  }
+  
+  .post-grid-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .no-posts-message {
+    padding: 2rem;
+    text-align: center;
+    background-color: var(--widget-bg);
+    border-radius: 8px;
+    margin: 2rem 0;
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 991px) {
+    .post-grid-item {
+      margin-bottom: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .category-menu {
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 0.75rem;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox */
+    }
+    
+    .category-menu::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Edge */
+    }
+    
+    .post-grid-item {
+      margin-bottom: 1.25rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .category-header {
+      padding: 1.25rem;
+    }
+    
+    .category-title {
+      font-size: 1.5rem;
+    }
+    
+    .category-button {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+      min-width: auto;
+    }
+  }
+</style>

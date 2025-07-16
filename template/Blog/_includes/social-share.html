@@ -1,0 +1,121 @@
+{% if site.widgets.post.share_buttons %}
+<div class="social-share">
+  <h4>Share This Article</h4>
+  <div class="share-buttons">
+    <a href="https://facebook.com/sharer/sharer.php?u={{ page.url | absolute_url }}" target="_blank" rel="noopener" class="share-facebook" aria-label="Share on Facebook">
+      <i data-feather="facebook"></i>
+      <span>Facebook</span>
+    </a>
+    <a href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ page.url | absolute_url }}" target="_blank" rel="noopener" class="share-twitter" aria-label="Share on Twitter">
+      <i data-feather="twitter"></i>
+      <span>Twitter</span>
+    </a>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url }}&title={{ page.title | uri_escape }}" target="_blank" rel="noopener" class="share-linkedin" aria-label="Share on LinkedIn">
+      <i data-feather="linkedin"></i>
+      <span>LinkedIn</span>
+    </a>
+    <a href="mailto:?subject={{ page.title | uri_escape }}&body={{ page.url | absolute_url }}" class="share-email" aria-label="Share via Email">
+      <i data-feather="mail"></i>
+      <span>Email</span>
+    </a>
+    <button onclick="navigator.share({title:'{{ page.title | escape }}',url:'{{ page.url | absolute_url }}'})" class="share-native" aria-label="Share">
+      <i data-feather="share-2"></i>
+      <span>Share</span>
+    </button>
+  </div>
+</div>
+
+<style>
+.social-share {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: var(--widget-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.social-share h4 {
+  margin-bottom: 1rem;
+  color: var(--heading-color);
+  font-size: 1.1rem;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.share-buttons a,
+.share-buttons button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-color);
+  background-color: var(--card-bg);
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.share-buttons a:hover,
+.share-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.share-facebook:hover {
+  background-color: #1877f2;
+  color: white;
+  border-color: #1877f2;
+}
+
+.share-twitter:hover {
+  background-color: #1da1f2;
+  color: white;
+  border-color: #1da1f2;
+}
+
+.share-linkedin:hover {
+  background-color: #0077b5;
+  color: white;
+  border-color: #0077b5;
+}
+
+.share-email:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.share-native:hover {
+  background-color: var(--secondary-color);
+  color: white;
+  border-color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+  .share-buttons {
+    justify-content: center;
+  }
+  
+  .share-buttons a,
+  .share-buttons button {
+    flex: 1;
+    justify-content: center;
+    min-width: 120px;
+  }
+}
+</style>
+
+<script>
+// Hide native share button if not supported
+if (!navigator.share) {
+  document.querySelector('.share-native').style.display = 'none';
+}
+</script>
+{% endif %}

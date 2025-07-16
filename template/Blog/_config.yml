@@ -1,0 +1,212 @@
+
+# Site settings
+title: MyBusiness
+description: Business Ideas blog - Discover innovative business strategies, entrepreneurship tips, and modern solutions for growing your business.
+author: MyBusiness Team
+email: info@mybusiness.web.id
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://mybusiness.web.id" # the base hostname & protocol for your site
+logo:
+default_image: /assets/img/default-post-image.svg
+copyright_year: © 2025 MyBusiness
+keywords:
+  - business ideas
+  - entrepreneurship
+  - startup
+  - business strategies
+  - innovation
+  - business growth
+  - marketing
+  - mybusiness
+
+# Build settings
+markdown: kramdown
+permalink: /:title/
+incremental: true
+include: ["_pages"]
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+# Exclude system files and folders from processing and watching
+exclude:
+  - .local
+  - .replit
+  - .cache
+  - .config
+  - .git
+  - .jekyll-cache
+  - .bundle
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+  - replit.nix
+  - node_modules
+  - "*.tmp"
+  - "*.bak"
+  - .sass-cache
+  - .DS_Store
+
+# Prevent regeneration of site for specific files
+keep_files:
+  - .git
+  - .jekyll-metadata
+
+# Plugins with optimized settings
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-minifier
+  - jekyll-paginate
+
+# Enhanced minifier settings
+jekyll-minifier:
+  exclude: ['*.xml', '*.json', '*.txt', '*.png', '*.jpg', '*.jpeg', '*.webp', '*.svg']
+  compress_css: true
+  compress_javascript: true
+  compress_html: true
+  html_minifier_options:
+    remove_comments: true
+    remove_empty_attributes: true
+    collapse_whitespace: true
+    minify_css: true
+    minify_js: true
+    
+# Pagination settings
+paginate: 12
+paginate_path: "/page/:num/"
+
+# SEO settings
+twitter:
+  username: cartlab
+  card: summary_large_image
+social:
+  name: MyBusiness
+  links:
+    - https://twitter.com/mybusiness
+    - https://facebook.com/mybusiness
+    - https://instagram.com/mybusiness
+    - https://linkedin.com/company/mybusiness
+
+# Analytics
+google_analytics: 
+
+# Disqus comments
+disqus:
+  shortname: cartlab-web-id
+
+# Performance settings
+performance:
+  posts_per_home: 12
+  lazy_loading: true
+  image_optimization: true
+
+# Default configurations
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      comments: true
+      toc: true
+      share: true
+      related: true
+
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+  - scope:
+      path: ""
+      type: "categories"
+    values:
+      layout: "category"
+
+  - scope:
+      path: ""
+      type: "tags"
+    values:
+      layout: "tag"
+
+
+
+# Content settings
+show_excerpts: true
+excerpt_separator: <!--more-->
+
+# Image optimization
+generate_images_from_title: true
+prefer_webp: true
+responsive_image_sizes: [300, 600, 900]
+external_images: true
+default_image: /assets/img/default-post-image.svg
+
+# AdSense Configuration
+adsense:
+  enabled: false
+  client_id: ""
+  display_slot: ""
+  in_article_slot: ""
+  publisher_id: ""
+
+# Widget optimization
+widgets:
+  sidebar:
+    enabled: true
+    recent_posts: true
+    categories: true
+    tags: false
+    popular_posts: true
+    advertisement: false
+  footer:
+    enabled: true
+    about: true
+    categories: true
+    recent_posts: true
+    tags: false
+  post:
+    share_buttons: true
+    
+# Featured posts
+featured_posts:
+  enabled: true
+  count: 6
+  show_excerpt: true
+  excerpt_length: 150
+  title: "Featured Articles"
+  display_author: true
+  display_date: true
+  display_categories: true
+
+# Performance optimization
+compress_html: true
+compress_css: true
+compress_js: true
+use_async_scripts: true
+liquid:
+  error_mode: warn
+  strict_filters: false
+  strict_variables: false
+
+# Jekyll processing optimization
+future: false
+unpublished: false
+safe: false
+disable_disk_cache: true
+incremental: true
+profile: false
+
+# Optimize build performance
+sass:
+  style: compressed
+  sourcemap: never
+
+# Limit processing
+limit_posts: 0

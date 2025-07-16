@@ -1,0 +1,24 @@
+<div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+  <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+    <a href="{{ '/' | relative_url }}" itemprop="item">
+      <span itemprop="name">Home</span>
+    </a>
+    <meta itemprop="position" content="1" />
+  </span>
+  
+  {% if page.categories.size > 0 %}
+    <span class="breadcrumb-separator">/</span>
+    <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+      <a href="{{ '/category/' | append: page.categories.first | relative_url }}" itemprop="item">
+        <span itemprop="name">{{ page.categories.first }}</span>
+      </a>
+      <meta itemprop="position" content="2" />
+    </span>
+  {% endif %}
+  
+  <span class="breadcrumb-separator">/</span>
+  <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+    <span itemprop="name">{{ page.title }}</span>
+    <meta itemprop="position" content="{% if page.categories.size > 0 %}3{% else %}2{% endif %}" />
+  </span>
+</div>

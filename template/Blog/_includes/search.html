@@ -1,0 +1,11 @@
+<div class="search-form">
+  <form action="{{ '/search/' | relative_url }}" method="get" role="search" id="search-form">
+    <div class="input-group">
+      <input type="search" name="q" id="search-input" class="form-control" placeholder="Search..." aria-label="Search" autocomplete="off">
+      <button type="submit" class="search-btn" id="search-submit-btn">
+        <i data-feather="search"></i>
+      </button>
+    </div>
+  </form>
+  <div id="live-search-results" class="live-search-results"></div>
+</div>

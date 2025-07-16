@@ -1,0 +1,75 @@
+<div class="toc-container" id="toc-container">
+  <div class="toc-header" id="toc-header">
+    <h4 class="toc-title">List of contents</h4>
+    <button class="toc-toggle" id="toc-toggle" aria-label="Toggle Table of Contents">
+      <i data-feather="chevron-down" id="toc-toggle-icon"></i>
+    </button>
+  </div>
+  
+  <div class="toc-content" id="toc-content">
+    <ul class="toc-list">
+      {% assign headers = include.html | split: '<h' %}
+      {% assign base_level = 2 %}
+      {% for header in headers offset: 1 %}
+        {% assign header_level = header | first | times: 1 %}
+        {% assign header_content = header | split: '</h' | first | split: '>' | last | strip_html | strip %}
+        {% assign header_id = header_content | slugify %}
+      
+        {% if header_level < base_level %}
+          {% assign base_level = header_level %}
+        {% endif %}
+      
+        {% assign indentation = header_level | minus: base_level %}
+      
+        <li class="toc-list-item toc-level-{{ indentation }}">
+          <a href="#{{ header_id }}" class="toc-link">{{ header_content }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tocHeader = document.getElementById('toc-header');
+    const tocContent = document.getElementById('toc-content');
+    const tocToggleIcon = document.getElementById('toc-toggle-icon');
+    
+    // Set initial state - collapsed
+    tocContent.style.display = 'none';
+    tocToggleIcon.classList.remove('feather-chevron-up');
+    tocToggleIcon.classList.add('feather-chevron-down');
+    
+    // Make the entire TOC header clickable, not just the toggle button
+    tocHeader.addEventListener('click', function(e) {
+      toggleToc();
+      e.stopPropagation(); // Prevent event from propagating
+    });
+    
+    // Function to toggle TOC visibility
+    function toggleToc() {
+      if (tocContent.style.display === 'none') {
+        tocContent.style.display = 'block';
+        tocToggleIcon.classList.remove('feather-chevron-down');
+        tocToggleIcon.classList.add('feather-chevron-up');
+      } else {
+        tocContent.style.display = 'none';
+        tocToggleIcon.classList.remove('feather-chevron-up');
+        tocToggleIcon.classList.add('feather-chevron-down');
+      }
+    }
+    
+    // Hide TOC when clicking outside
+    document.addEventListener('click', function(e) {
+      const container = document.getElementById('toc-container');
+      if (!container.contains(e.target) && tocContent.style.display === 'block') {
+        toggleToc();
+      }
+    });
+    
+    // Don't close the TOC when clicking a link inside it
+    tocContent.addEventListener('click', function(e) {
+      e.stopPropagation(); // Prevent event from closing the TOC
+    });
+  });
+</script>

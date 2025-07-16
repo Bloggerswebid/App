@@ -1,0 +1,11 @@
+{% if include.content %}
+  {% assign words = include.content | strip_html | number_of_words %}
+{% else %}
+  {% assign words = page.content | strip_html | number_of_words %}
+{% endif %}
+
+{% if words < 360 %}
+  <span class="reading-time"><i data-feather="clock"></i> 1 min read</span>
+{% else %}
+  <span class="reading-time"><i data-feather="clock"></i> {{ words | divided_by: 180 }} min read</span>
+{% endif %}

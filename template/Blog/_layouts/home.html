@@ -1,0 +1,36 @@
+---
+layout: default
+---
+<div class="home-container col-lg-8">
+  
+  <div class="latest-posts">
+    <h2 class="section-title">Latest Articles</h2>
+    <div class="post-grid-container">
+      <div class="post-grid">
+        {% assign post_limit = site.performance.posts_per_home | default: 12 %}
+        {% assign displayed_posts = 0 %}
+        {% for post in site.posts %}
+          {% if displayed_posts < post_limit %}
+            <div class="post-grid-item">
+              {% include post-card.html post=post %}
+            </div>
+            {% assign displayed_posts = displayed_posts | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    
+    {% assign post_limit = site.performance.posts_per_home | default: 10 %}
+    {% if site.posts.size > post_limit %}
+      <div class="view-all-posts">
+        <a href="{{ '/page/2/' | relative_url }}" class="btn btn-primary">See Full Article</a>
+      </div>
+    {% endif %}
+  </div>
+  
+  {{ content }}
+</div>
+
+<div class="sidebar col-lg-4">
+  {% include sidebar.html %}
+</div>

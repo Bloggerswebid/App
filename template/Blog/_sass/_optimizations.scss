@@ -1,0 +1,215 @@
+// Performance and Professional Styling Optimizations
+
+// Enhanced button styles
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  
+  &.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
+    color: white;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+      background: linear-gradient(135deg, #1d4ed8, var(--primary-color));
+    }
+  }
+  
+  &.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+    
+    &:hover {
+      background-color: #475569;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Enhanced section titles
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: 2rem;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), #60a5fa);
+    border-radius: 2px;
+  }
+}
+
+// Professional tag styling
+.tag, .category-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--tag-bg);
+  color: var(--text-color);
+  text-decoration: none;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+  
+  &:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  }
+}
+
+// Enhanced footer styling
+.site-footer {
+  background: linear-gradient(135deg, var(--footer-bg), var(--widget-bg));
+  border-top: 2px solid var(--border-color);
+  
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      color: var(--text-color);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+      }
+      
+      &[href*="facebook"]:hover {
+        background-color: #1877f2;
+        border-color: #1877f2;
+        color: white;
+      }
+      
+      &[href*="twitter"]:hover {
+        background-color: #1da1f2;
+        border-color: #1da1f2;
+        color: white;
+      }
+      
+      &[href*="instagram"]:hover {
+        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        border-color: #bc1888;
+        color: white;
+      }
+      
+      &[href*="linkedin"]:hover {
+        background-color: #0077b5;
+        border-color: #0077b5;
+        color: white;
+      }
+      
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+  
+  .footer-links {
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      li {
+        margin-bottom: 0.5rem;
+        
+        a {
+          color: var(--footer-text);
+          text-decoration: none;
+          transition: all 0.3s ease;
+          position: relative;
+          
+          &:hover {
+            color: var(--primary-color);
+            padding-left: 8px;
+          }
+          
+          &::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+          }
+          
+          &:hover::before {
+            width: 4px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Professional loading states
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-top: 2px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+// Enhanced responsive design
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+}

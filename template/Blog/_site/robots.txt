@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Sitemap and Feed locations for better SEO
+Sitemap: http://0.0.0.0:5000/sitemap.xml
+Sitemap: http://0.0.0.0:5000/feed.xml
+
+# Allow important content for indexing
+Allow: /posts/
+Allow: /categories/
+Allow: /tags/
+Allow: /about/
+Allow: /contact/
+Allow: /services/
+Allow: /portfolio/
+
+# Disallow unnecessary files and admin areas
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /*.txt$
+Disallow: /search/
+Disallow: /_*
+
+# Optimized crawl delay for better performance
+Crawl-delay: 1

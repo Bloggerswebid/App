@@ -1,0 +1,268 @@
+// Bootstrap utility classes for display
+// These are simplified versions of Bootstrap's display utilities
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Display utilities
+.d-none {
+  display: none !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+// Responsive display utilities
+@media (min-width: $breakpoint-sm) {
+  .d-sm-none {
+    display: none !important;
+  }
+  
+  .d-sm-block {
+    display: block !important;
+  }
+  
+  .d-sm-flex {
+    display: flex !important;
+  }
+}
+
+@media (min-width: $breakpoint-md) {
+  .d-md-none {
+    display: none !important;
+  }
+  
+  .d-md-block {
+    display: block !important;
+  }
+  
+  .d-md-flex {
+    display: flex !important;
+  }
+}
+
+@media (min-width: $breakpoint-lg) {
+  .d-lg-none {
+    display: none !important;
+  }
+  
+  .d-lg-block {
+    display: block !important;
+  }
+  
+  .d-lg-flex {
+    display: flex !important;
+  }
+}
+
+@media (min-width: $breakpoint-xl) {
+  .d-xl-none {
+    display: none !important;
+  }
+  
+  .d-xl-block {
+    display: block !important;
+  }
+  
+  .d-xl-flex {
+    display: flex !important;
+  }
+}
+
+// Grid system classes (simplified)
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: $breakpoint-sm) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: $breakpoint-md) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: $breakpoint-lg) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: $breakpoint-xl) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.row-cols-1 > * {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.row-cols-2 > * {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.row-cols-3 > * {
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+}
+
+.row-cols-4 > * {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+@media (min-width: $breakpoint-sm) {
+  .row-cols-sm-1 > * {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .row-cols-sm-2 > * {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  
+  .row-cols-sm-3 > * {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+  
+  .row-cols-sm-4 > * {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+@media (min-width: $breakpoint-md) {
+  .row-cols-md-1 > * {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .row-cols-md-2 > * {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  
+  .row-cols-md-3 > * {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+  
+  .row-cols-md-4 > * {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+@media (min-width: $breakpoint-lg) {
+  .row-cols-lg-1 > * {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .row-cols-lg-2 > * {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  
+  .row-cols-lg-3 > * {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+  
+  .row-cols-lg-4 > * {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+.g-4 {
+  margin-right: -1.5rem;
+  margin-left: -1.5rem;
+}
+
+.g-4 > * {
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.col {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+// Add column utility classes
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    flex: 0 0 percentage($i / 12);
+    max-width: percentage($i / 12);
+  }
+}
+
+@media (min-width: $breakpoint-sm) {
+  @for $i from 1 through 12 {
+    .col-sm-#{$i} {
+      flex: 0 0 percentage($i / 12);
+      max-width: percentage($i / 12);
+    }
+  }
+}
+
+@media (min-width: $breakpoint-md) {
+  @for $i from 1 through 12 {
+    .col-md-#{$i} {
+      flex: 0 0 percentage($i / 12);
+      max-width: percentage($i / 12);
+    }
+  }
+}
+
+@media (min-width: $breakpoint-lg) {
+  @for $i from 1 through 12 {
+    .col-lg-#{$i} {
+      flex: 0 0 percentage($i / 12);
+      max-width: percentage($i / 12);
+    }
+  }
+}
+
+@media (min-width: $breakpoint-xl) {
+  @for $i from 1 through 12 {
+    .col-xl-#{$i} {
+      flex: 0 0 percentage($i / 12);
+      max-width: percentage($i / 12);
+    }
+  }
+}

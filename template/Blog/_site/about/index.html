@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<!-- DNS Prefetch for faster domain lookups -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+<link rel="dns-prefetch" href="//cartlab-web-id.disqus.com">
+
+
+<!-- Modern browsers - tell browsers to start early connections -->
+<link rel="preconnect" crossorigin href="https://fonts.googleapis.com">
+<link rel="preconnect" crossorigin href="https://fonts.gstatic.com">
+<link rel="preconnect" crossorigin href="https://cdn.jsdelivr.net">
+<link rel="preconnect" crossorigin href="https://cdnjs.cloudflare.com">
+
+<!-- Preload critical resources -->
+<link rel="preload" href="/assets/images/default-thumbnail.svg" as="image" type="image/svg+xml">
+
+<!-- Force favicon to render -->
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+<!-- Browser caching hints via HTTP headers -->
+
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+
+  <meta http-equiv="X-Robots-Tag" content="index, follow" />
+
+
+  <title>About Us | MyBusiness</title>
+  <meta property="og:title" content="About Us" />
+  <meta name="twitter:title" content="About Us" />
+
+
+
+  <meta name="description" content="Business Ideas blog - Discover innovative business strategies, entrepreneurship tips, and modern solutions for growing your business." />
+  <meta property="og:description" content="Business Ideas blog - Discover innovative business strategies, entrepreneurship tips, and modern solutions for growing your business." />
+  <meta name="twitter:description" content="Business Ideas blog - Discover innovative business strategies, entrepreneurship tips, and modern solutions for growing your business." />
+
+
+
+  <link rel="canonical" href="http://0.0.0.0:5000/about/" />
+  <meta property="og:url" content="http://0.0.0.0:5000/about/" />
+  <meta name="twitter:url" content="http://0.0.0.0:5000/about/" />
+
+
+
+  <meta property="og:image" content="http://0.0.0.0:5000/assets/img/default-post-image.svg" />
+  <meta name="twitter:image" content="http://0.0.0.0:5000/assets/img/default-post-image.svg" />
+
+
+
+  <meta property="og:type" content="website" />
+
+
+
+
+
+
+
+  <meta name="twitter:site" content="@cartlab" />
+  <meta name="twitter:creator" content="@cartlab" />
+
+
+<meta name="twitter:card" content="summary_large_image" />
+
+
+  <meta name="keywords" content="business ideas, entrepreneurship, startup, business strategies, innovation, business growth, marketing, mybusiness" />
+
+
+<!-- Preload Critical Assets -->
+<link rel="preload" href="/assets/images/default-thumbnail.svg" as="image" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+<!-- Critical inline CSS for fastest initial render -->
+
+<style>
+/* Critical CSS for faster page rendering */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --heading-color: #212529;
+  --link-color: #0d6efd;
+  --border-color: #dee2e6;
+  --widget-bg: #f8f9fa;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --header-height: 70px;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --heading-color: #f8f9fa;
+  --link-color: #6ea8fe;
+  --border-color: #2d2d2d;
+  --widget-bg: #1e1e1e;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Responsive image handling */
+.responsive-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.responsive-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* Image fallback styling */
+.image-fallback {
+  object-fit: contain;
+  background-color: var(--widget-bg);
+  border: 1px solid var(--border-color);
+}
+
+.broken-image-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Header basic styling for first render */
+.site-header {
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+}
+
+/* Main content area */
+.content {
+  padding: 2rem 0;
+}
+
+/* Skeleton loading placeholders */
+.skeleton-loading {
+  background: linear-gradient(
+    90deg,
+    var(--widget-bg) 25%,
+    var(--border-color) 50%,
+    var(--widget-bg) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+</style>
+
+<!-- Direct CSS loading for better page rendering -->
+<link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+<link rel="alternate" type="application/rss+xml" title="MyBusiness" href="/feed.xml">
+
+
+
+<!-- Enhanced meta tags for better SEO -->
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+</head>
+<body>
+  <div class="wrapper">
+    <header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="site-branding">
+        <a href="/" class="site-logo">
+          <span class="site-title">MyBusiness</span>
+        </a>
+      </div>
+      
+      <div class="header-right">
+        <nav class="site-navigation d-none d-lg-flex">
+          <ul class="nav-menu">
+  
+    
+      <li><a href="/">Home</a></li>
+    
+  
+    
+      <li><a href="/about/">About</a></li>
+    
+  
+    
+      <li><a href="/contact/">Contact</a></li>
+    
+  
+</ul>
+        </nav>
+        
+        <div class="header-actions">
+          <div class="search-toggle">
+            <button id="search-toggle-btn" aria-label="Search">
+              <i data-feather="search"></i>
+            </button>
+          </div>
+          
+          <div class="dark-mode-toggle">
+            <div class="theme-toggle">
+  <button id="theme-toggle-btn" aria-label="Toggle dark mode">
+    <i data-feather="sun" class="light-icon"></i>
+    <i data-feather="moon" class="dark-icon"></i>
+  </button>
+</div>
+
+          </div>
+          
+          <div class="mobile-menu-toggle d-lg-none">
+            <button id="menu-toggle-btn" aria-label="Menu">
+              <i data-feather="menu"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="searchBox" class="search-box">
+      <div class="search-form">
+  <form action="/search/" method="get" role="search" id="search-form">
+    <div class="input-group">
+      <input type="search" name="q" id="search-input" class="form-control" placeholder="Search..." aria-label="Search" autocomplete="off">
+      <button type="submit" class="search-btn" id="search-submit-btn">
+        <i data-feather="search"></i>
+      </button>
+    </div>
+  </form>
+  <div id="live-search-results" class="live-search-results"></div>
+</div>
+
+    </div>
+  </div>
+  
+  <div id="mobileMenu" class="mobile-menu d-lg-none">
+    <div class="mobile-menu-inner">
+      <div class="mobile-menu-header">
+        <div class="mobile-search">
+          <div class="search-form">
+  <form action="/search/" method="get" role="search" id="search-form">
+    <div class="input-group">
+      <input type="search" name="q" id="search-input" class="form-control" placeholder="Search..." aria-label="Search" autocomplete="off">
+      <button type="submit" class="search-btn" id="search-submit-btn">
+        <i data-feather="search"></i>
+      </button>
+    </div>
+  </form>
+  <div id="live-search-results" class="live-search-results"></div>
+</div>
+
+        </div>
+      </div>
+      <nav class="mobile-navigation">
+        <ul class="nav-menu">
+  
+    
+      <li><a href="/">Home</a></li>
+    
+  
+    
+      <li><a href="/about/">About</a></li>
+    
+  
+    
+      <li><a href="/contact/">Contact</a></li>
+    
+  
+</ul>
+      </nav>
+    </div>
+  </div>
+  
+  <div id="mobileMenuOverlay" class="mobile-menu-overlay"></div>
+</header>
+
+    
+    <!-- Header AdSense Ad -->
+    
+    
+    <main class="content" aria-label="Content">
+      <div class="container">
+        <div class="row">
+          <div class="page-container col-lg-8">
+  <div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+  <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+    <a href="/" itemprop="item">
+      <span itemprop="name">Home</span>
+    </a>
+    <meta itemprop="position" content="1" />
+  </span>
+  
+  
+  
+  <span class="breadcrumb-separator">/</span>
+  <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+    <span itemprop="name">About Us</span>
+    <meta itemprop="position" content="2" />
+  </span>
+</div>
+
+  
+  <article class="page">
+    <header class="page-header">
+      <h1 class="page-title">About Us</h1>
+    </header>
+    
+    <div class="page-content">
+      <h1 id="tentang-kami">Tentang Kami</h1>
+
+<p>Selamat datang di blog kami! Kami adalah tim profesional yang berdedikasi untuk menyajikan konten berkualitas tinggi seputar desain interior, arsitektur, dan lifestyle modern.</p>
+
+<h2 id="misi-kami">Misi Kami</h2>
+
+<p>Menyediakan inspirasi dan panduan praktis untuk menciptakan ruang hidup yang indah, funktional, dan mencerminkan kepribadian Anda.</p>
+
+<h2 id="visi-kami">Visi Kami</h2>
+
+<p>Menjadi sumber terpercaya untuk semua kebutuhan informasi desain dan arsitektur Anda.</p>
+
+<h2 id="tim-kami">Tim Kami</h2>
+
+<p>Tim kami terdiri dari:</p>
+<ul>
+  <li>Desainer interior berpengalaman</li>
+  <li>Arsitek profesional</li>
+  <li>Penulis konten spesialis</li>
+  <li>Editor visual yang ahli</li>
+</ul>
+
+<h2 id="keahlian-kami">Keahlian Kami</h2>
+
+<h3 id="desain-interior">Desain Interior</h3>
+<p>Kami memiliki pengalaman luas dalam menciptakan ruang interior yang fungsional dan estetis untuk berbagai jenis hunian.</p>
+
+<h3 id="desain-eksterior">Desain Eksterior</h3>
+<p>Tim kami ahli dalam merancang fasad dan tampilan luar bangunan yang menarik dan sesuai dengan karakter pemilik.</p>
+
+<h3 id="landscape--garden">Landscape &amp; Garden</h3>
+<p>Kami juga berpengalaman dalam merancang taman dan lanskap yang harmonis dengan bangunan.</p>
+
+<h2 id="mengapa-memilih-kami">Mengapa Memilih Kami?</h2>
+
+<ul>
+  <li><strong>Pengalaman Bertahun-tahun</strong> dalam industri desain</li>
+  <li><strong>Tim Profesional</strong> yang bersertifikat</li>
+  <li><strong>Konten Berkualitas</strong> yang selalu update</li>
+  <li><strong>Inspirasi Terkini</strong> sesuai tren global</li>
+</ul>
+
+<h2 id="hubungi-kami">Hubungi Kami</h2>
+
+<p>Jika Anda memiliki pertanyaan atau ingin berbagi ide, jangan ragu untuk <a href="/contact/">menghubungi kami</a>.</p>
+
+<hr />
+
+<p><em>Terima kasih telah mempercayai kami sebagai sumber inspirasi desain Anda!</em></p>
+
+    </div>
+  </article>
+</div>
+
+<div class="sidebar col-lg-4">
+  <div class="sidebar-widgets">
+  <div class="widget search-widget">
+    <div class="widget-content">
+      <div class="search-form">
+  <form action="/search/" method="get" role="search" id="search-form">
+    <div class="input-group">
+      <input type="search" name="q" id="search-input" class="form-control" placeholder="Search..." aria-label="Search" autocomplete="off">
+      <button type="submit" class="search-btn" id="search-submit-btn">
+        <i data-feather="search"></i>
+      </button>
+    </div>
+  </form>
+  <div id="live-search-results" class="live-search-results"></div>
+</div>
+
+    </div>
+  </div>
+  
+  
+    
+    <div class="widget popular-posts-widget">
+      <h4 class="widget-title">Popular Posts</h4>
+      <div class="widget-content">
+        <ul class="popular-posts-list">
+          
+        </ul>
+      </div>
+    </div>
+    
+    
+    
+    <div class="widget categories-widget">
+      <h4 class="widget-title">Categories</h4>
+      <div class="widget-content">
+        <ul class="categories-list">
+          
+        </ul>
+      </div>
+    </div>
+    
+    
+    
+    
+    
+  
+</div>
+
+</div>
+
+        </div>
+      </div>
+    </main>
+    
+    <footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="footer-info">
+            <h3>MyBusiness</h3>
+            <p>Business Ideas blog - Discover innovative business strategies, entrepreneurship tips, and modern solutions for growing your business.</p>
+            <div class="social-links">
+              <a href="https://facebook.com/mybusiness" target="_blank" rel="noopener" aria-label="Facebook">
+                <i data-feather="facebook"></i>
+              </a>
+              <a href="https://twitter.com/mybusiness" target="_blank" rel="noopener" aria-label="Twitter">
+                <i data-feather="twitter"></i>
+              </a>
+              <a href="https://instagram.com/mybusiness" target="_blank" rel="noopener" aria-label="Instagram">
+                <i data-feather="instagram"></i>
+              </a>
+              <a href="https://linkedin.com/company/mybusiness" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <i data-feather="linkedin"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-3">
+          <div class="footer-links">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="/about/">About Us</a></li>
+              <li><a href="/services/">Services</a></li>
+              <li><a href="/portfolio/">Portfolio</a></li>
+              <li><a href="/contact/">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-md-2">
+          <div class="footer-links">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-md-3">
+          <div class="footer-links">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="/categories/">Categories</a></li>
+              <li><a href="/advertise/">Advertise</a></li>
+              <li><a href="/disclaimer/">Disclaimer</a></li>
+              <li><a href="/feed.xml">RSS Feed</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="copyright">
+        <p>&copy; 2025 MyBusiness. All rights reserved.</p>
+      </div>
+
+
+      <div class="back-to-top">
+        <a href="#" id="back-to-top-btn" aria-label="Back to top">
+          <i data-feather="chevron-up"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    feather.replace();
+  });
+</script>
+
+  </div>
+
+  <!-- Popup ads removed for better user experience -->
+  
+  <!-- Essential scripts only -->
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/dark-mode.js" defer></script>
+  
+  <!-- Load non-critical scripts after page is interactive -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Dynamically load search script after page is ready
+      if (document.querySelector('.search-form, .search-toggle')) {
+        const searchScript = document.createElement('script');
+        searchScript.src = "/assets/js/search-live.js";
+        document.body.appendChild(searchScript);
+      }
+      
+      // Load TOC script only on pages that need it
+      if (document.querySelector('.toc-container')) {
+        const tocScript = document.createElement('script');
+        tocScript.src = "/assets/js/toc.js";
+        document.body.appendChild(tocScript);
+      }
+      
+      // Load Disqus script only when comments section is visible
+      if (document.querySelector('.comments-section')) {
+        const disqusScript = document.createElement('script');
+        disqusScript.src = "/assets/js/disqus-loader.js";
+        document.body.appendChild(disqusScript);
+      }
+    });
+  </script>
+  
+  
+</body>
+</html>

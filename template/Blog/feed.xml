@@ -1,0 +1,4 @@
+---
+layout: null
+---
+{% include custom_feed.xml %}

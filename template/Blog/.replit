@@ -1,0 +1,44 @@
+modules = ["ruby"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Jekyll Server"
+
+[[workflows.workflow]]
+name = "Jekyll Server"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "bundle exec jekyll serve --host=0.0.0.0 --port=5000"
+waitForPort = 5000
+
+[[workflows.workflow]]
+name = "unzip - replec"
+mode = "sequential"
+author = 43021890
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "unzip zip.zip ALL"
+
+[deployment]
+run = ["sh", "-c", "bundle exec jekyll serve --host=0.0.0.0 --port=5000"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80

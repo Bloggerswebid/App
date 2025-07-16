@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<!-- DNS Prefetch for faster domain lookups -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+<link rel="dns-prefetch" href="//cartlab-web-id.disqus.com">
+
+
+<!-- Modern browsers - tell browsers to start early connections -->
+<link rel="preconnect" crossorigin href="https://fonts.googleapis.com">
+<link rel="preconnect" crossorigin href="https://fonts.gstatic.com">
+<link rel="preconnect" crossorigin href="https://cdn.jsdelivr.net">
+<link rel="preconnect" crossorigin href="https://cdnjs.cloudflare.com">
+
+<!-- Preload critical resources -->
+<link rel="preload" href="/assets/images/default-thumbnail.svg" as="image" type="image/svg+xml">
+
+<!-- Force favicon to render -->
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+<!-- Browser caching hints via HTTP headers -->
+
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+
+  <meta http-equiv="X-Robots-Tag" content="index, follow" />
+
+
+  <title>Portfolio | MyBusiness</title>
+  <meta property="og:title" content="Portfolio" />
+  <meta name="twitter:title" content="Portfolio" />
+
+
+
+  <meta name="description" content="Business Ideas blog - Discover innovative business strategies, entrepreneurship tips, and modern solutions for growing your business." />
+  <meta property="og:description" content="Business Ideas blog - Discover innovative business strategies, entrepreneurship tips, and modern solutions for growing your business." />
+  <meta name="twitter:description" content="Business Ideas blog - Discover innovative business strategies, entrepreneurship tips, and modern solutions for growing your business." />
+
+
+
+  <link rel="canonical" href="http://0.0.0.0:5000/portfolio/" />
+  <meta property="og:url" content="http://0.0.0.0:5000/portfolio/" />
+  <meta name="twitter:url" content="http://0.0.0.0:5000/portfolio/" />
+
+
+
+  <meta property="og:image" content="http://0.0.0.0:5000/assets/img/default-post-image.svg" />
+  <meta name="twitter:image" content="http://0.0.0.0:5000/assets/img/default-post-image.svg" />
+
+
+
+  <meta property="og:type" content="website" />
+
+
+
+
+
+
+
+  <meta name="twitter:site" content="@cartlab" />
+  <meta name="twitter:creator" content="@cartlab" />
+
+
+<meta name="twitter:card" content="summary_large_image" />
+
+
+  <meta name="keywords" content="business ideas, entrepreneurship, startup, business strategies, innovation, business growth, marketing, mybusiness" />
+
+
+<!-- Preload Critical Assets -->
+<link rel="preload" href="/assets/images/default-thumbnail.svg" as="image" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+<!-- Critical inline CSS for fastest initial render -->
+
+<style>
+/* Critical CSS for faster page rendering */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --heading-color: #212529;
+  --link-color: #0d6efd;
+  --border-color: #dee2e6;
+  --widget-bg: #f8f9fa;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --header-height: 70px;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --heading-color: #f8f9fa;
+  --link-color: #6ea8fe;
+  --border-color: #2d2d2d;
+  --widget-bg: #1e1e1e;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Responsive image handling */
+.responsive-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.responsive-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* Image fallback styling */
+.image-fallback {
+  object-fit: contain;
+  background-color: var(--widget-bg);
+  border: 1px solid var(--border-color);
+}
+
+.broken-image-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Header basic styling for first render */
+.site-header {
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+}
+
+/* Main content area */
+.content {
+  padding: 2rem 0;
+}
+
+/* Skeleton loading placeholders */
+.skeleton-loading {
+  background: linear-gradient(
+    90deg,
+    var(--widget-bg) 25%,
+    var(--border-color) 50%,
+    var(--widget-bg) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+</style>
+
+<!-- Direct CSS loading for better page rendering -->
+<link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+<link rel="alternate" type="application/rss+xml" title="MyBusiness" href="/feed.xml">
+
+
+
+<!-- Enhanced meta tags for better SEO -->
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+</head>
+<body>
+  <div class="wrapper">
+    <header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <div class="site-branding">
+        <a href="/" class="site-logo">
+          <span class="site-title">MyBusiness</span>
+        </a>
+      </div>
+      
+      <div class="header-right">
+        <nav class="site-navigation d-none d-lg-flex">
+          <ul class="nav-menu">
+  
+    
+      <li><a href="/">Home</a></li>
+    
+  
+    
+      <li><a href="/about/">About</a></li>
+    
+  
+    
+      <li><a href="/contact/">Contact</a></li>
+    
+  
+</ul>
+        </nav>
+        
+        <div class="header-actions">
+          <div class="search-toggle">
+            <button id="search-toggle-btn" aria-label="Search">
+              <i data-feather="search"></i>
+            </button>
+          </div>
+          
+          <div class="dark-mode-toggle">
+            <div class="theme-toggle">
+  <button id="theme-toggle-btn" aria-label="Toggle dark mode">
+    <i data-feather="sun" class="light-icon"></i>
+    <i data-feather="moon" class="dark-icon"></i>
+  </button>
+</div>
+
+          </div>
+          
+          <div class="mobile-menu-toggle d-lg-none">
+            <button id="menu-toggle-btn" aria-label="Menu">
+              <i data-feather="menu"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="searchBox" class="search-box">
+      <div class="search-form">
+  <form action="/search/" method="get" role="search" id="search-form">
+    <div class="input-group">
+      <input type="search" name="q" id="search-input" class="form-control" placeholder="Search..." aria-label="Search" autocomplete="off">
+      <button type="submit" class="search-btn" id="search-submit-btn">
+        <i data-feather="search"></i>
+      </button>
+    </div>
+  </form>
+  <div id="live-search-results" class="live-search-results"></div>
+</div>
+
+    </div>
+  </div>
+  
+  <div id="mobileMenu" class="mobile-menu d-lg-none">
+    <div class="mobile-menu-inner">
+      <div class="mobile-menu-header">
+        <div class="mobile-search">
+          <div class="search-form">
+  <form action="/search/" method="get" role="search" id="search-form">
+    <div class="input-group">
+      <input type="search" name="q" id="search-input" class="form-control" placeholder="Search..." aria-label="Search" autocomplete="off">
+      <button type="submit" class="search-btn" id="search-submit-btn">
+        <i data-feather="search"></i>
+      </button>
+    </div>
+  </form>
+  <div id="live-search-results" class="live-search-results"></div>
+</div>
+
+        </div>
+      </div>
+      <nav class="mobile-navigation">
+        <ul class="nav-menu">
+  
+    
+      <li><a href="/">Home</a></li>
+    
+  
+    
+      <li><a href="/about/">About</a></li>
+    
+  
+    
+      <li><a href="/contact/">Contact</a></li>
+    
+  
+</ul>
+      </nav>
+    </div>
+  </div>
+  
+  <div id="mobileMenuOverlay" class="mobile-menu-overlay"></div>
+</header>
+
+    
+    <!-- Header AdSense Ad -->
+    
+    
+    <main class="content" aria-label="Content">
+      <div class="container">
+        <div class="row">
+          <div class="page-container col-lg-8">
+  <div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+  <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+    <a href="/" itemprop="item">
+      <span itemprop="name">Home</span>
+    </a>
+    <meta itemprop="position" content="1" />
+  </span>
+  
+  
+  
+  <span class="breadcrumb-separator">/</span>
+  <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+    <span itemprop="name">Portfolio</span>
+    <meta itemprop="position" content="2" />
+  </span>
+</div>
+
+  
+  <article class="page">
+    <header class="page-header">
+      <h1 class="page-title">Portfolio</h1>
+    </header>
+    
+    <div class="page-content">
+      <h1 id="portfolio-kami">Portfolio Kami</h1>
+
+<p>Berikut adalah koleksi proyek-proyek terbaik yang telah kami kerjakan. Setiap proyek mencerminkan dedikasi kami untuk menciptakan ruang yang fungsional dan indah.</p>
+
+<h2 id="residential-projects">Residential Projects</h2>
+
+<h3 id="modern-minimalist-house---jakarta-selatan">Modern Minimalist House - Jakarta Selatan</h3>
+<p><strong>Tahun:</strong> 2024<br />
+<strong>Luas:</strong> 150m²<br />
+<strong>Style:</strong> Minimalist Modern</p>
+
+<p>Transformasi rumah keluarga dengan konsep open space yang memaksimalkan cahaya alami dan sirkulasi udara. Penggunaan material natural wood dan batu alam menciptakan suasana hangat namun tetap modern.</p>
+
+<p><strong>Highlights:</strong></p>
+<ul>
+  <li>Open kitchen dengan island counter</li>
+  <li>Living room dengan ceiling tinggi</li>
+  <li>Master bedroom dengan walk-in closet</li>
+  <li>Rooftop garden untuk relaksasi</li>
+</ul>
+
+<h3 id="contemporary-villa---bali">Contemporary Villa - Bali</h3>
+<p><strong>Tahun:</strong> 2023<br />
+<strong>Luas:</strong> 300m²<br />
+<strong>Style:</strong> Tropical Contemporary</p>
+
+<p>Villa resort dengan perpaduan arsitektur modern dan sentuhan tradisional Bali. Desain mengutamakan integrasi dengan alam sekitar dan view menakjubkan ke sawah.</p>
+
+<p><strong>Highlights:</strong></p>
+<ul>
+  <li>Infinity pool menghadap sawah</li>
+  <li>Open-air pavilion untuk yoga</li>
+  <li>Traditional joglo sebagai main living area</li>
+  <li>Sustainable bamboo construction</li>
+</ul>
+
+<h2 id="commercial-projects">Commercial Projects</h2>
+
+<h3 id="boutique-coffee-shop---bandung">Boutique Coffee Shop - Bandung</h3>
+<p><strong>Tahun:</strong> 2024<br />
+<strong>Luas:</strong> 80m²<br />
+<strong>Style:</strong> Industrial Chic</p>
+
+<p>Coffee shop dengan konsep industrial yang hangat, menggunakan exposed brick dan steel frame. Layout dirancang untuk memberikan experience yang memorable bagi customer.</p>
+
+<p><strong>Highlights:</strong></p>
+<ul>
+  <li>Custom coffee bar dengan copper details</li>
+  <li>Mezzanine seating area</li>
+  <li>Vintage lighting fixtures</li>
+  <li>Green wall sebagai focal point</li>
+</ul>
+
+<h3 id="modern-office-space---surabaya">Modern Office Space - Surabaya</h3>
+<p><strong>Tahun:</strong> 2023<br />
+<strong>Luas:</strong> 500m²<br />
+<strong>Style:</strong> Modern Corporate</p>
+
+<p>Kantor dengan konsep activity-based working yang mendukung produktivitas dan kolaborasi tim. Desain interior yang fresh dan energik menciptakan lingkungan kerja yang inspiring.</p>
+
+<p><strong>Highlights:</strong></p>
+<ul>
+  <li>Open collaboration spaces</li>
+  <li>Quiet zones untuk focused work</li>
+  <li>Recreation area dengan games</li>
+  <li>Meeting rooms dengan smart technology</li>
+</ul>
+
+<h2 id="interior-design-projects">Interior Design Projects</h2>
+
+<h3 id="scandinavian-apartment---jakarta-utara">Scandinavian Apartment - Jakarta Utara</h3>
+<p><strong>Tahun:</strong> 2024<br />
+<strong>Luas:</strong> 65m²<br />
+<strong>Style:</strong> Scandinavian</p>
+
+<p>Apartemen compact dengan solusi storage yang cerdas dan aesthetic Scandinavian yang clean. Pemilihan warna netral dengan accent natural wood menciptakan suasana cozy.</p>
+
+<p><strong>Highlights:</strong></p>
+<ul>
+  <li>Built-in storage solutions</li>
+  <li>Multifunctional furniture</li>
+  <li>Large windows untuk natural light</li>
+  <li>Hygge corner untuk reading</li>
+</ul>
+
+<h3 id="luxury-penthouse---surabaya">Luxury Penthouse - Surabaya</h3>
+<p><strong>Tahun:</strong> 2023<br />
+<strong>Luas:</strong> 200m²<br />
+<strong>Style:</strong> Contemporary Luxury</p>
+
+<p>Penthouse mewah dengan view city skyline, menggabungkan material premium dengan teknologi smart home. Setiap detail dirancang untuk memberikan pengalaman luxury living.</p>
+
+<p><strong>Highlights:</strong></p>
+<ul>
+  <li>Home automation system</li>
+  <li>Wine cellar dengan climate control</li>
+  <li>Master suite dengan spa bathroom</li>
+  <li>Entertainment room dengan home theater</li>
+</ul>
+
+<h2 id="garden--landscape-projects">Garden &amp; Landscape Projects</h2>
+
+<h3 id="zen-garden---yogyakarta">Zen Garden - Yogyakarta</h3>
+<p><strong>Tahun:</strong> 2024<br />
+<strong>Luas:</strong> 200m²<br />
+<strong>Style:</strong> Japanese Zen</p>
+
+<p>Taman dengan filosofi zen yang menghadirkan ketenangan dan keseimbangan. Penggunaan air feature dan stone arrangement menciptakan meditation space yang sempurna.</p>
+
+<p><strong>Highlights:</strong></p>
+<ul>
+  <li>Koi pond dengan water circulation</li>
+  <li>Tea house untuk meditation</li>
+  <li>Bamboo grove untuk privacy</li>
+  <li>Stone pathway dengan moss garden</li>
+</ul>
+
+<h3 id="rooftop-urban-farm---jakarta">Rooftop Urban Farm - Jakarta</h3>
+<p><strong>Tahun:</strong> 2023<br />
+<strong>Luas:</strong> 100m²<br />
+<strong>Style:</strong> Urban Sustainable</p>
+
+<p>Transformasi rooftop menjadi urban farm yang produktif sekaligus beautiful. Sistem hydroponics dan vertical farming memaksimalkan hasil panen di area terbatas.</p>
+
+<p><strong>Highlights:</strong></p>
+<ul>
+  <li>Hydroponic growing systems</li>
+  <li>Rainwater harvesting</li>
+  <li>Composting area</li>
+  <li>Herb garden untuk kuliner</li>
+</ul>
+
+<h2 id="renovation-projects">Renovation Projects</h2>
+
+<h3 id="heritage-house-restoration---bandung">Heritage House Restoration - Bandung</h3>
+<p><strong>Tahun:</strong> 2023<br />
+<strong>Luas:</strong> 180m²<br />
+<strong>Style:</strong> Colonial Heritage</p>
+
+<p>Restorasi rumah heritage dengan mempertahankan karakter arsitektur asli sambil mengadaptasi kebutuhan modern. Careful preservation dengan modern intervention yang sensitif.</p>
+
+<p><strong>Highlights:</strong></p>
+<ul>
+  <li>Original wooden structure preservation</li>
+  <li>Modern kitchen dalam heritage shell</li>
+  <li>Period-appropriate lighting fixtures</li>
+  <li>Traditional tile restoration</li>
+</ul>
+
+<h2 id="awards--recognition">Awards &amp; Recognition</h2>
+
+<ul>
+  <li><strong>Best Residential Design 2024</strong> - Indonesia Design Awards</li>
+  <li><strong>Sustainable Design Excellence 2023</strong> - Green Building Council</li>
+  <li><strong>Innovation in Small Space Design 2023</strong> - Design Week Jakarta</li>
+</ul>
+
+<h2 id="proses-desain-kami">Proses Desain Kami</h2>
+
+<ol>
+  <li><strong>Discovery &amp; Research</strong> - Memahami kebutuhan dan preferensi klien</li>
+  <li><strong>Concept Development</strong> - Mengembangkan ide dan konsep desain</li>
+  <li><strong>Design Development</strong> - Detail drawings dan material selection</li>
+  <li><strong>Project Management</strong> - Supervisi konstruksi dan implementasi</li>
+  <li><strong>Final Delivery</strong> - Handover dan after-sales support</li>
+</ol>
+
+<h2 id="mulai-proyek-anda">Mulai Proyek Anda</h2>
+
+<p>Tertarik dengan style dan kualitas kerja kami? <a href="/contact/">Hubungi kami</a> untuk diskusi lebih lanjut tentang proyek impian Anda!</p>
+
+<hr />
+
+<p><em>Setiap ruang memiliki potensi untuk menjadi luar biasa. Mari wujudkan visi Anda bersama kami.</em></p>
+
+    </div>
+  </article>
+</div>
+
+<div class="sidebar col-lg-4">
+  <div class="sidebar-widgets">
+  <div class="widget search-widget">
+    <div class="widget-content">
+      <div class="search-form">
+  <form action="/search/" method="get" role="search" id="search-form">
+    <div class="input-group">
+      <input type="search" name="q" id="search-input" class="form-control" placeholder="Search..." aria-label="Search" autocomplete="off">
+      <button type="submit" class="search-btn" id="search-submit-btn">
+        <i data-feather="search"></i>
+      </button>
+    </div>
+  </form>
+  <div id="live-search-results" class="live-search-results"></div>
+</div>
+
+    </div>
+  </div>
+  
+  
+    
+    <div class="widget popular-posts-widget">
+      <h4 class="widget-title">Popular Posts</h4>
+      <div class="widget-content">
+        <ul class="popular-posts-list">
+          
+        </ul>
+      </div>
+    </div>
+    
+    
+    
+    <div class="widget categories-widget">
+      <h4 class="widget-title">Categories</h4>
+      <div class="widget-content">
+        <ul class="categories-list">
+          
+        </ul>
+      </div>
+    </div>
+    
+    
+    
+    
+    
+  
+</div>
+
+</div>
+
+        </div>
+      </div>
+    </main>
+    
+    <footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="footer-info">
+            <h3>MyBusiness</h3>
+            <p>Business Ideas blog - Discover innovative business strategies, entrepreneurship tips, and modern solutions for growing your business.</p>
+            <div class="social-links">
+              <a href="https://facebook.com/mybusiness" target="_blank" rel="noopener" aria-label="Facebook">
+                <i data-feather="facebook"></i>
+              </a>
+              <a href="https://twitter.com/mybusiness" target="_blank" rel="noopener" aria-label="Twitter">
+                <i data-feather="twitter"></i>
+              </a>
+              <a href="https://instagram.com/mybusiness" target="_blank" rel="noopener" aria-label="Instagram">
+                <i data-feather="instagram"></i>
+              </a>
+              <a href="https://linkedin.com/company/mybusiness" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <i data-feather="linkedin"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-3">
+          <div class="footer-links">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="/about/">About Us</a></li>
+              <li><a href="/services/">Services</a></li>
+              <li><a href="/portfolio/">Portfolio</a></li>
+              <li><a href="/contact/">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-md-2">
+          <div class="footer-links">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-md-3">
+          <div class="footer-links">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="/categories/">Categories</a></li>
+              <li><a href="/advertise/">Advertise</a></li>
+              <li><a href="/disclaimer/">Disclaimer</a></li>
+              <li><a href="/feed.xml">RSS Feed</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="copyright">
+        <p>&copy; 2025 MyBusiness. All rights reserved.</p>
+      </div>
+
+
+      <div class="back-to-top">
+        <a href="#" id="back-to-top-btn" aria-label="Back to top">
+          <i data-feather="chevron-up"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    feather.replace();
+  });
+</script>
+
+  </div>
+
+  <!-- Popup ads removed for better user experience -->
+  
+  <!-- Essential scripts only -->
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/dark-mode.js" defer></script>
+  
+  <!-- Load non-critical scripts after page is interactive -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Dynamically load search script after page is ready
+      if (document.querySelector('.search-form, .search-toggle')) {
+        const searchScript = document.createElement('script');
+        searchScript.src = "/assets/js/search-live.js";
+        document.body.appendChild(searchScript);
+      }
+      
+      // Load TOC script only on pages that need it
+      if (document.querySelector('.toc-container')) {
+        const tocScript = document.createElement('script');
+        tocScript.src = "/assets/js/toc.js";
+        document.body.appendChild(tocScript);
+      }
+      
+      // Load Disqus script only when comments section is visible
+      if (document.querySelector('.comments-section')) {
+        const disqusScript = document.createElement('script');
+        disqusScript.src = "/assets/js/disqus-loader.js";
+        document.body.appendChild(disqusScript);
+      }
+    });
+  </script>
+  
+  
+</body>
+</html>

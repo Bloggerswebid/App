@@ -1,0 +1,191 @@
+// Search Styles
+.search-form {
+  position: relative;
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+    border-radius: $border-radius;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    background-color: var(--input-bg);
+    
+    input {
+      flex: 1;
+      border: none;
+      padding: 0.75rem 1rem;
+      background-color: transparent;
+      color: var(--text-color);
+      font-size: 0.95rem;
+      
+      &:focus {
+        outline: none;
+      }
+    }
+    
+    .search-btn {
+      background-color: var(--input-bg);
+      border: none;
+      padding: 0.75rem 1rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: $transition-fast;
+      
+      &:hover {
+        color: var(--link-color);
+      }
+      
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+  
+  // Live search results
+  .live-search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: $border-radius;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    margin-top: 0.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    
+    &.active, &[style*="display: block"] {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    p {
+      padding: 1rem;
+      margin: 0;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    
+    .live-search-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      .live-search-item {
+        border-bottom: 1px solid var(--border-color);
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        a {
+          display: flex;
+          padding: 0.8rem 1rem;
+          color: var(--text-color);
+          justify-content: space-between;
+          align-items: center;
+          transition: $transition-fast;
+          text-decoration: none;
+          
+          &:hover {
+            background-color: var(--hover-bg);
+          }
+          
+          .live-search-title {
+            flex: 1;
+            font-weight: 500;
+            margin-right: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          
+          .live-search-category {
+            font-size: 0.8rem;
+            color: var(--meta-color);
+            background-color: var(--tag-bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            white-space: nowrap;
+          }
+        }
+      }
+      
+      .live-search-more {
+        text-align: center;
+        background-color: var(--hover-bg);
+        
+        a {
+          display: block;
+          padding: 0.6rem 1rem;
+          color: var(--link-color);
+          font-weight: 500;
+          font-size: 0.9rem;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Search results page
+.search-results-container {
+  .search-form {
+    margin-bottom: 2rem;
+    max-width: 600px;
+  }
+  
+  .search-results-list {
+    .search-result-item {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      h3 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        
+        a {
+          color: var(--heading-color);
+          
+          &:hover {
+            color: var(--link-color);
+          }
+        }
+      }
+      
+      .search-result-excerpt {
+        margin-bottom: 0.75rem;
+        
+        mark {
+          background-color: rgba(var(--accent-rgb), 0.2);
+          padding: 0.1rem 0.2rem;
+          border-radius: 2px;
+        }
+      }
+      
+      .search-result-meta {
+        font-size: 0.85rem;
+        color: var(--meta-color);
+        
+        .date {
+          margin-right: 0.75rem;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,217 @@
+// Typography styles
+
+// Base typography
+body {
+  font-family: $base-font-family;
+  line-height: $base-line-height;
+  color: var(--text-color);
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+  font-family: $heading-font-family;
+  line-height: $heading-line-height;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.25rem;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: 2rem;
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: 1.75rem;
+  }
+}
+
+h2 {
+  font-size: 1.75rem;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: 1.5rem;
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: 1.4rem;
+  }
+}
+
+h3 {
+  font-size: 1.5rem;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: 1.35rem;
+  }
+  
+  @media (max-width: $breakpoint-sm) {
+    font-size: 1.25rem;
+  }
+}
+
+h4 {
+  font-size: 1.25rem;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: 1.15rem;
+  }
+}
+
+h5 {
+  font-size: 1.125rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+// Paragraphs
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Links
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: $transition-fast;
+  
+  &:hover, &:focus {
+    color: var(--link-hover-color);
+    text-decoration: none;
+  }
+}
+
+// Lists
+ul, ol {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  
+  li {
+    margin-bottom: 0.5rem;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Quotes
+blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--link-color);
+  background-color: var(--widget-bg);
+  border-radius: $border-radius;
+  
+  p {
+    margin-bottom: 0;
+    font-style: italic;
+  }
+  
+  cite {
+    display: block;
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--meta-color);
+    font-style: normal;
+    
+    &:before {
+      content: "— ";
+    }
+  }
+}
+
+// Section titles
+.section-title {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-bottom: 0.75rem;
+  
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 50px;
+    background-color: var(--link-color);
+  }
+}
+
+// Text utilities
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.text-muted {
+  color: var(--meta-color);
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.text-italic {
+  font-style: italic;
+}
+
+// Code
+code, pre {
+  font-family: $monospace-font-family;
+  font-size: 0.9rem;
+}
+
+code {
+  padding: 0.2rem 0.4rem;
+  background-color: var(--code-bg);
+  border-radius: $border-radius-sm;
+}
+
+pre {
+  padding: 1rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  background-color: var(--code-bg);
+  border-radius: $border-radius;
+  
+  code {
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+  }
+}
