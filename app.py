@@ -34,6 +34,84 @@ from template_admin import render_template_admin
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+class ConfigManager:
+    """Mengelola konfigurasi aplikasi termasuk GitHub token"""
+    
+    def __init__(self, config_file="config.txt"):
+        self.config_file = config_file
+        self.config = self._load_config()
+    
+    def _load_config(self):
+        """Load konfigurasi dari file config.txt"""
+        config = {}
+        if os.path.exists(self.config_file):
+            try:
+                with open(self.config_file, 'r', encoding='utf-8') as f:
+                    for line in f:
+                        line = line.strip()
+                        if line and '=' in line and not line.startswith('#'):
+                            key, value = line.split('=', 1)
+                            config[key.strip()] = value.strip()
+                logger.info(f"Konfigurasi dimuat dari {self.config_file}")
+            except Exception as e:
+                logger.error(f"Error membaca konfigurasi: {e}")
+        return config
+    
+    def save_config(self):
+        """Simpan konfigurasi ke file config.txt"""
+        try:
+            with open(self.config_file, 'w', encoding='utf-8') as f:
+                f.write("# Auto Article Publisher Configuration\n")
+                f.write(f"# Last updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+                
+                for key, value in self.config.items():
+                    f.write(f"{key}={value}\n")
+            
+            logger.info(f"Konfigurasi disimpan ke {self.config_file}")
+            return True
+        except Exception as e:
+            logger.error(f"Error menyimpan konfigurasi: {e}")
+            return False
+    
+    def get(self, key, default=None):
+        """Ambil nilai konfigurasi"""
+        return self.config.get(key, default)
+    
+    def set(self, key, value):
+        """Set nilai konfigurasi"""
+        self.config[key] = str(value)
+    
+    def save_github_token(self, token):
+        """Simpan GitHub token ke konfigurasi"""
+        self.set('GITHUB_TOKEN', token)
+        self.set('TOKEN_SAVED_AT', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        return self.save_config()
+    
+    def get_github_token(self):
+        """Ambil GitHub token dari konfigurasi"""
+        return self.get('GITHUB_TOKEN')
+    
+    def enable_auto_trigger(self, interval_minutes=60):
+        """Aktifkan trigger otomatis"""
+        self.set('AUTO_TRIGGER_ENABLED', 'true')
+        self.set('AUTO_TRIGGER_INTERVAL', str(interval_minutes))
+        self.set('AUTO_TRIGGER_ENABLED_AT', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        return self.save_config()
+    
+    def disable_auto_trigger(self):
+        """Nonaktifkan trigger otomatis"""
+        self.set('AUTO_TRIGGER_ENABLED', 'false')
+        self.set('AUTO_TRIGGER_DISABLED_AT', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        return self.save_config()
+    
+    def is_auto_trigger_enabled(self):
+        """Cek apakah trigger otomatis aktif"""
+        return self.get('AUTO_TRIGGER_ENABLED', 'false').lower() == 'true'
+    
+    def get_auto_trigger_interval(self):
+        """Ambil interval trigger otomatis"""
+        return int(self.get('AUTO_TRIGGER_INTERVAL', '60'))
+
 class GitHubManager:
     """Mengelola operasi GitHub API"""
     
@@ -297,6 +375,35 @@ class AutoScheduler:
         except Exception as e:
             logger.error(f"Error in scheduled article generation: {e}")
 
+def startup_initialization():
+    """Inisialisasi startup - load token tersimpan dan setup koneksi otomatis"""
+    # Inisialisasi session state
+    if 'config_manager' not in st.session_state:
+        st.session_state.config_manager = ConfigManager()
+    if 'github_manager' not in st.session_state:
+        st.session_state.github_manager = None
+    if 'scheduler' not in st.session_state:
+        st.session_state.scheduler = AutoScheduler()
+    if 'selected_repo' not in st.session_state:
+        st.session_state.selected_repo = None
+    
+    # Auto-load saved token
+    saved_token = st.session_state.config_manager.get_github_token()
+    if saved_token and not st.session_state.github_manager:
+        try:
+            st.session_state.github_manager = GitHubManager(saved_token)
+            logger.info("GitHub connection auto-loaded from saved token")
+            
+            # Auto-start scheduler jika auto-trigger enabled
+            if st.session_state.config_manager.is_auto_trigger_enabled():
+                logger.info("Auto-trigger is enabled, scheduler will start when repository is selected")
+                
+        except Exception as e:
+            logger.error(f"Failed to auto-load GitHub connection: {e}")
+            # Clear invalid token
+            st.session_state.config_manager.set('GITHUB_TOKEN', '')
+            st.session_state.config_manager.save_config()
+
 def main():
     """Fungsi utama Streamlit"""
     st.set_page_config(
@@ -305,6 +412,9 @@ def main():
         layout="wide",
         initial_sidebar_state="expanded"
     )
+    
+    # Inisialisasi startup
+    startup_initialization()
     
     # Header dengan styling CMS
     st.markdown("""
@@ -345,6 +455,8 @@ def render_content_manager():
         st.session_state.selected_repo = None
     if 'scheduler' not in st.session_state:
         st.session_state.scheduler = AutoScheduler()
+    if 'config_manager' not in st.session_state:
+        st.session_state.config_manager = ConfigManager()
     
     st.header("📝 Content Manager")
     st.subheader("Manage your Jekyll content like WordPress cPanel")
@@ -353,19 +465,84 @@ def render_content_manager():
     with st.sidebar:
         st.header("🔧 GitHub Connection")
         
-        # GitHub Token
+        # Load saved token jika ada
+        saved_token = st.session_state.config_manager.get_github_token()
+        
+        # GitHub Token input dengan default dari saved token
         github_token = st.text_input(
             "GitHub Token",
+            value=saved_token if saved_token else "",
             type="password",
             help="Masukkan GitHub Personal Access Token"
         )
         
+        # Tombol untuk save token
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("💾 Save Token"):
+                if github_token:
+                    if st.session_state.config_manager.save_github_token(github_token):
+                        st.success("✅ Token saved to config.txt!")
+                        # Auto enable trigger ketika token disimpan
+                        st.session_state.config_manager.enable_auto_trigger(60)
+                        st.success("✅ Auto-trigger enabled!")
+                        st.rerun()
+                    else:
+                        st.error("❌ Failed to save token")
+                else:
+                    st.error("❌ Please enter a token")
+        
+        with col2:
+            if st.button("🗑️ Clear Token"):
+                st.session_state.config_manager.set('GITHUB_TOKEN', '')
+                st.session_state.config_manager.disable_auto_trigger()
+                st.session_state.config_manager.save_config()
+                st.session_state.github_manager = None
+                st.success("✅ Token cleared!")
+                st.rerun()
+        
+        # Status koneksi GitHub
+        if saved_token:
+            st.info(f"🔐 Token saved at: {st.session_state.config_manager.get('TOKEN_SAVED_AT', 'Unknown')}")
+            
+            # Auto-trigger status
+            if st.session_state.config_manager.is_auto_trigger_enabled():
+                interval = st.session_state.config_manager.get_auto_trigger_interval()
+                st.success(f"⚡ Auto-trigger: ON ({interval} min)")
+                
+                if st.button("⏹️ Disable Auto-trigger"):
+                    st.session_state.config_manager.disable_auto_trigger()
+                    if st.session_state.scheduler.running:
+                        st.session_state.scheduler.stop_scheduler()
+                    st.success("Auto-trigger disabled!")
+                    st.rerun()
+            else:
+                st.warning("⚡ Auto-trigger: OFF")
+                if st.button("▶️ Enable Auto-trigger"):
+                    st.session_state.config_manager.enable_auto_trigger(60)
+                    st.success("Auto-trigger enabled!")
+                    st.rerun()
+        
+        # Coba koneksi GitHub
         if github_token and not st.session_state.github_manager:
             try:
                 st.session_state.github_manager = GitHubManager(github_token)
                 st.success("✅ GitHub connected successfully!")
+                
+                # Auto-start scheduler jika auto-trigger enabled dan token tersimpan
+                if (saved_token and 
+                    st.session_state.config_manager.is_auto_trigger_enabled() and 
+                    not st.session_state.scheduler.running and
+                    st.session_state.selected_repo):
+                    
+                    processor = ArticleProcessor(st.session_state.selected_repo, st.session_state.github_manager)
+                    interval = st.session_state.config_manager.get_auto_trigger_interval()
+                    st.session_state.scheduler.start_scheduler(processor, interval)
+                    st.info(f"🚀 Auto-scheduler started with {interval} min interval")
+                    
             except Exception as e:
                 st.error(f"❌ Error: {str(e)}")
+                st.error("Please check your token and try again")
         
         # Repository Selection
         if st.session_state.github_manager:
@@ -388,6 +565,15 @@ def render_content_manager():
                     st.info(f"📊 **{selected_repo['name']}**\n"
                            f"🌟 Stars: {selected_repo.get('stargazers_count', 0)}\n"
                            f"🔄 Language: {selected_repo.get('language', 'N/A')}")
+                    
+                    # Auto-start scheduler jika auto-trigger enabled dan repository dipilih
+                    if (st.session_state.config_manager.is_auto_trigger_enabled() and 
+                        not st.session_state.scheduler.running):
+                        
+                        processor = ArticleProcessor(selected_repo_name, st.session_state.github_manager)
+                        interval = st.session_state.config_manager.get_auto_trigger_interval()
+                        st.session_state.scheduler.start_scheduler(processor, interval)
+                        st.success(f"🚀 Auto-scheduler started: {interval} min interval")
             else:
                 st.warning("No repositories found")
         
@@ -544,9 +730,39 @@ def render_content_manager():
         with col2:
             st.subheader("🎛️ Control Panel")
             
-            # Auto-run settings
-            st.subheader("⚡ Auto-Run Settings")
-            auto_run_enabled = st.checkbox("Enable Auto-Run", value=False)
+            # Configuration Status
+            st.subheader("⚙️ Configuration Status")
+            
+            # GitHub Token Status
+            if st.session_state.config_manager.get_github_token():
+                st.success("🔐 GitHub Token: Saved")
+                saved_at = st.session_state.config_manager.get('TOKEN_SAVED_AT', 'Unknown')
+                st.caption(f"Saved: {saved_at}")
+            else:
+                st.error("🔐 GitHub Token: Not saved")
+            
+            # Auto-trigger Status
+            if st.session_state.config_manager.is_auto_trigger_enabled():
+                interval = st.session_state.config_manager.get_auto_trigger_interval()
+                st.success(f"⚡ Auto-trigger: ON ({interval} min)")
+                enabled_at = st.session_state.config_manager.get('AUTO_TRIGGER_ENABLED_AT', 'Unknown')
+                st.caption(f"Enabled: {enabled_at}")
+            else:
+                st.warning("⚡ Auto-trigger: OFF")
+            
+            # Scheduler Status
+            if st.session_state.scheduler.running:
+                st.success("🤖 Scheduler: Running")
+                if st.session_state.scheduler.last_run:
+                    st.caption(f"Last run: {st.session_state.scheduler.last_run.strftime('%H:%M:%S')}")
+            else:
+                st.info("🤖 Scheduler: Stopped")
+            
+            st.divider()
+            
+            # Manual Auto-run controls (legacy)
+            st.subheader("⚡ Manual Controls")
+            auto_run_enabled = st.checkbox("Manual Auto-Run", value=False)
             
             if auto_run_enabled:
                 interval_minutes = st.slider(
